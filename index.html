@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Marketing Trends — Study Guide</title>
+<style>
+/* ===========================================================
+   DESIGN SYSTEM — Apple-style web aesthetic
+   =========================================================== */
+:root{
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "SF Mono", ui-monospace, "Menlo", Consolas, monospace;
+
+  --bg: #fbfbfd;
+  --bg-blur: rgba(251,251,253,.72);
+  --surface: #ffffff;
+  --surface-2: #f5f5f7;
+  --surface-3: #efeff1;
+  --text: #1d1d1f;
+  --text-2: #515154;
+  --text-3: #86868b;
+  --hairline: #d2d2d7;
+  --hairline-soft: #e8e8ed;
+
+  --accent: #0071e3;
+  --accent-press: #0077ed;
+  --link: #0066cc;
+
+  --a-tint: #0071e3;          /* Block A — Foundations & Strategy */
+  --a-soft: rgba(0,113,227,.08);
+  --a-soft-2: rgba(0,113,227,.13);
+  --b-tint: #1d8a5e;          /* Block B — Digital Channels & Tactics */
+  --b-soft: rgba(29,138,94,.09);
+  --b-soft-2: rgba(29,138,94,.15);
+  --warn: #b25000;
+  --warn-soft: rgba(201,120,0,.10);
+
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r: 18px;
+  --r-lg: 24px;
+  --r-xl: 30px;
+
+  --shadow-1: 0 1px 3px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.05);
+  --shadow-2: 0 6px 30px rgba(0,0,0,.09);
+
+  --sidebar-w: 280px;
+  --top-h: 52px;
+  --maxw: 1240px;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+html[data-theme="dark"]{
+  --bg: #000000;
+  --bg-blur: rgba(22,22,23,.72);
+  --surface: #1d1d1f;
+  --surface-2: #2a2a2c;
+  --surface-3: #323234;
+  --text: #f5f5f7;
+  --text-2: #c7c7cc;
+  --text-3: #8e8e93;
+  --hairline: #38383c;
+  --hairline-soft: #2c2c2e;
+  --accent: #2997ff;
+  --accent-press: #47a6ff;
+  --link: #2997ff;
+  --a-tint: #2997ff;
+  --a-soft: rgba(41,151,255,.12);
+  --a-soft-2: rgba(41,151,255,.18);
+  --b-tint: #41c98a;
+  --b-soft: rgba(65,201,138,.12);
+  --b-soft-2: rgba(65,201,138,.18);
+  --warn: #f0a35e;
+  --warn-soft: rgba(240,163,94,.12);
+  --shadow-1: 0 1px 3px rgba(0,0,0,.4), 0 6px 22px rgba(0,0,0,.5);
+  --shadow-2: 0 8px 36px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--font);line-height:1.55;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:120;
+  background:linear-gradient(90deg,var(--a-tint),var(--b-tint));transition:width .1s linear}
+
+/* top bar */
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--top-h);z-index:100;
+  display:flex;align-items:center;gap:14px;padding:0 18px;
+  background:var(--bg-blur);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--hairline-soft)}
+.topbar .brand{font-weight:600;font-size:15px;letter-spacing:-.01em;white-space:nowrap}
+.topbar .brand b{color:var(--a-tint)}
+.topbar .spacer{flex:1}
+.menu-btn{display:none;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;padding:6px;border-radius:8px}
+.search-wrap{position:relative}
+.search-wrap input{
+  font-family:var(--font);font-size:13px;color:var(--text);
+  background:var(--surface-2);border:1px solid var(--hairline-soft);border-radius:980px;
+  padding:7px 12px 7px 32px;width:190px;transition:.2s var(--ease);outline:none}
+.search-wrap input:focus{border-color:var(--accent);width:230px;background:var(--surface)}
+.search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;fill:var(--text-3)}
+.theme-btn{background:var(--surface-2);border:1px solid var(--hairline-soft);color:var(--text);
+  width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px;display:grid;place-items:center;transition:.2s}
+.theme-btn:hover{background:var(--surface-3)}
+
+/* layout */
+.shell{display:flex;max-width:var(--maxw);margin:0 auto}
+.sidebar{position:sticky;top:var(--top-h);align-self:flex-start;width:var(--sidebar-w);height:calc(100vh - var(--top-h));
+  overflow-y:auto;padding:26px 14px 60px 22px;flex:0 0 auto}
+.sidebar h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin:20px 8px 8px;font-weight:600}
+.sidebar a{display:block;text-decoration:none;color:var(--text-2);font-size:13.5px;padding:7px 12px;border-radius:9px;
+  transition:.15s var(--ease);border-left:2.5px solid transparent;margin:1px 0}
+.sidebar a:hover{background:var(--surface-2);color:var(--text)}
+.sidebar a.active{background:var(--a-soft);color:var(--a-tint);font-weight:600;border-left-color:var(--a-tint)}
+.sidebar a.b.active{background:var(--b-soft);color:var(--b-tint);border-left-color:var(--b-tint)}
+.sidebar .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.sidebar .dot.a{background:var(--a-tint)}.sidebar .dot.b{background:var(--b-tint)}
+
+main{flex:1 1 auto;min-width:0;padding:0 28px 120px;max-width:880px}
+
+/* hero */
+.hero{padding:70px 0 30px}
+.hero .eyebrow{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--a-tint);margin-bottom:14px}
+.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.04;letter-spacing:-.025em;margin:0 0 18px;font-weight:700}
+.hero h1 .grad{background:linear-gradient(120deg,var(--a-tint),var(--b-tint));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:19px;color:var(--text-2);max-width:600px;margin:0 0 26px}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--text-2);
+  background:var(--surface);border:1px solid var(--hairline-soft);border-radius:980px;padding:7px 14px;box-shadow:var(--shadow-1)}
+.chip .d{width:8px;height:8px;border-radius:50%}
+.chip .d.a{background:var(--a-tint)}.chip .d.b{background:var(--b-tint)}
+
+/* how to use */
+.howto{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:var(--r-lg);
+  padding:26px 28px;margin:18px 0 10px;box-shadow:var(--shadow-1)}
+.howto h3{margin:0 0 6px;font-size:17px;letter-spacing:-.01em}
+.howto p{margin:0 0 16px;color:var(--text-2);font-size:14.5px}
+.howto .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.howto .g{background:var(--surface-2);border-radius:var(--r-sm);padding:14px 15px}
+.howto .g .t{font-weight:600;font-size:13.5px;margin-bottom:3px;display:flex;align-items:center;gap:7px}
+.howto .g .t svg{width:15px;height:15px;fill:var(--a-tint)}
+.howto .g .d{font-size:12.5px;color:var(--text-3);line-height:1.45}
+
+/* block divider */
+.block-head{margin:64px 0 8px;padding-top:14px}
+.block-head .k{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.block-head.a .k{color:var(--a-tint)}.block-head.b .k{color:var(--b-tint)}
+.block-head h2{font-size:30px;letter-spacing:-.02em;margin:6px 0 0;font-weight:700}
+.block-head .rule{height:3px;width:54px;border-radius:3px;margin-top:14px}
+.block-head.a .rule{background:var(--a-tint)}.block-head.b .rule{background:var(--b-tint)}
+
+/* topic */
+.topic{scroll-margin-top:70px;padding:30px 0 8px;border-top:1px solid var(--hairline-soft);margin-top:26px}
+.topic:first-of-type{border-top:none}
+.topic .num{font-family:var(--mono);font-size:12.5px;color:var(--text-3);letter-spacing:.04em}
+.topic h3.tt{font-size:25px;letter-spacing:-.02em;margin:6px 0 0;font-weight:700;display:flex;align-items:baseline;gap:10px}
+.topic h3.tt .tag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:980px;letter-spacing:.02em}
+.topic.a h3.tt .tag{background:var(--a-soft);color:var(--a-tint)}
+.topic.b h3.tt .tag{background:var(--b-soft);color:var(--b-tint)}
+
+/* TL;DR summary card (advance organizer) */
+.tldr{border-radius:var(--r);padding:20px 22px;margin:20px 0 4px;border:1px solid var(--hairline-soft)}
+.topic.a .tldr{background:var(--a-soft)}
+.topic.b .tldr{background:var(--b-soft)}
+.tldr .lbl{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:9px}
+.topic.a .tldr .lbl{color:var(--a-tint)}
+.topic.b .tldr .lbl{color:var(--b-tint)}
+.tldr ul{margin:0;padding-left:18px}
+.tldr li{margin:5px 0;font-size:14.5px;color:var(--text)}
+.tldr li b{font-weight:600}
+
+/* collapsible full detail (active recall) */
+details.detail{margin:14px 0 0;border:1px solid var(--hairline-soft);border-radius:var(--r-sm);background:var(--surface);overflow:hidden;box-shadow:var(--shadow-1)}
+details.detail > summary{cursor:pointer;list-style:none;padding:14px 18px;font-weight:600;font-size:14.5px;
+  display:flex;align-items:center;justify-content:space-between;user-select:none;transition:background .15s}
+details.detail > summary::-webkit-details-marker{display:none}
+details.detail > summary:hover{background:var(--surface-2)}
+details.detail > summary .chev{width:18px;height:18px;transition:transform .25s var(--ease);flex:0 0 auto}
+details.detail[open] > summary .chev{transform:rotate(90deg)}
+details.detail > summary .chev svg{width:18px;height:18px;fill:var(--text-3)}
+.detail-body{padding:4px 20px 20px;border-top:1px solid var(--hairline-soft)}
+.detail-body h5{font-size:15px;margin:18px 0 6px;letter-spacing:-.01em;color:var(--text)}
+.detail-body h5:first-child{margin-top:14px}
+.detail-body p{margin:9px 0;font-size:14.5px;color:var(--text-2)}
+.detail-body ul{margin:9px 0;padding-left:20px}
+.detail-body li{margin:5px 0;font-size:14.5px;color:var(--text-2)}
+.detail-body b,.detail-body strong{color:var(--text);font-weight:600}
+.detail-body code{font-family:var(--mono);font-size:12.5px;background:var(--surface-3);padding:1px 6px;border-radius:6px}
+
+.quote{font-style:italic;color:var(--text-2);border-left:3px solid var(--a-tint);padding:4px 16px;margin:14px 0;font-size:14.5px}
+.topic.b .quote{border-left-color:var(--b-tint)}
+.quote .src{display:block;font-style:normal;color:var(--text-3);font-size:12.5px;margin-top:6px}
+
+.pill{display:inline-block;background:var(--surface-2);border:1px solid var(--hairline-soft);border-radius:980px;
+  padding:4px 12px;margin:3px 4px 3px 0;font-size:12.5px;color:var(--text-2)}
+
+table.cmp{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+table.cmp th,table.cmp td{border:1px solid var(--hairline-soft);padding:9px 12px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--surface-2);font-weight:600;color:var(--text)}
+table.cmp td{color:var(--text-2)}
+
+figure{margin:18px 0;text-align:center}
+figure svg{max-width:100%;height:auto;background:var(--surface);border:1px solid var(--hairline-soft);border-radius:var(--r-sm);padding:14px;box-shadow:var(--shadow-1)}
+figcaption{color:var(--text-3);font-size:12.5px;margin-top:8px}
+
+/* generic section title within main */
+.sec-title{font-size:22px;letter-spacing:-.02em;margin:60px 0 4px;font-weight:700;padding-top:14px}
+.sec-sub{color:var(--text-2);font-size:14.5px;margin:0 0 6px}
+
+/* ===== Flashcards (spaced retrieval) ===== */
+.fc-controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 18px}
+.fc-controls .seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--hairline-soft);border-radius:980px;padding:3px}
+.fc-controls .seg button{border:none;background:none;font-family:var(--font);font-size:13px;font-weight:500;color:var(--text-2);
+  padding:6px 14px;border-radius:980px;cursor:pointer;transition:.15s}
+.fc-controls .seg button.on{background:var(--surface);color:var(--text);box-shadow:var(--shadow-1)}
+.fc-controls .seg button.on[data-b="a"]{color:var(--a-tint)}
+.fc-controls .seg button.on[data-b="b"]{color:var(--b-tint)}
+.fc-controls .count{font-size:12.5px;color:var(--text-3);margin-left:auto}
+.flashcard{perspective:1600px;height:230px;margin:0 0 14px;cursor:pointer}
+.flashcard .inner{position:relative;width:100%;height:100%;transition:transform .55s var(--ease);transform-style:preserve-3d}
+.flashcard.flip .inner{transform:rotateY(180deg)}
+.flashcard .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--r);padding:26px;display:flex;flex-direction:column;justify-content:center;
+  border:1px solid var(--hairline-soft);box-shadow:var(--shadow-1)}
+.flashcard .front{background:var(--surface)}
+.flashcard .front .q{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.flashcard .front .hint{position:absolute;bottom:16px;left:26px;font-size:11.5px;color:var(--text-3)}
+.flashcard .front .badge,.flashcard .back .badge{position:absolute;top:16px;right:18px;font-size:10.5px;font-weight:700;
+  letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:980px}
+.flashcard .badge.a{background:var(--a-soft);color:var(--a-tint)}
+.flashcard .badge.b{background:var(--b-soft);color:var(--b-tint)}
+.flashcard .back{transform:rotateY(180deg)}
+.flashcard .back.a{background:var(--a-soft)}
+.flashcard .back.b{background:var(--b-soft)}
+.flashcard .back .a-txt{font-size:14.5px;color:var(--text);line-height:1.5}
+.fc-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:6px}
+.fc-nav button{font-family:var(--font);background:var(--surface-2);border:1px solid var(--hairline-soft);color:var(--text);
+  font-size:13.5px;font-weight:500;padding:9px 18px;border-radius:980px;cursor:pointer;transition:.15s}
+.fc-nav button:hover{background:var(--surface-3)}
+.fc-nav .pos{font-size:13px;color:var(--text-3);font-variant-numeric:tabular-nums}
+
+/* ===== Self-check Q&A ===== */
+.selfcheck details{border-bottom:1px solid var(--hairline-soft);padding:2px 0}
+.selfcheck summary{cursor:pointer;list-style:none;padding:14px 4px;font-size:15px;font-weight:500;
+  display:flex;gap:12px;align-items:flex-start;transition:.15s}
+.selfcheck summary::-webkit-details-marker{display:none}
+.selfcheck summary:hover{color:var(--a-tint)}
+.selfcheck summary .qn{font-family:var(--mono);font-size:12.5px;color:var(--text-3);flex:0 0 auto;padding-top:2px}
+.selfcheck summary .plus{margin-left:auto;flex:0 0 auto;width:20px;height:20px;position:relative;transition:transform .25s}
+.selfcheck details[open] summary .plus{transform:rotate(45deg)}
+.selfcheck summary .plus::before,.selfcheck summary .plus::after{content:"";position:absolute;background:var(--text-3);border-radius:2px}
+.selfcheck summary .plus::before{top:9px;left:3px;right:3px;height:2px}
+.selfcheck summary .plus::after{left:9px;top:3px;bottom:3px;width:2px}
+.selfcheck .ans{padding:0 4px 16px 40px;font-size:14px;color:var(--text-2);line-height:1.55}
+
+/* ===== Glossary ===== */
+.glossary{column-count:2;column-gap:30px}
+@media(max-width:680px){.glossary{column-count:1}}
+.glossary .term{break-inside:avoid;margin:0 0 14px;padding:0}
+.glossary .term dt{font-weight:600;font-size:14px;color:var(--text)}
+.glossary .term dd{margin:2px 0 0;font-size:13px;color:var(--text-2);line-height:1.5}
+
+/* ===== Quiz engine ===== */
+.quiz{margin:22px 0 0}
+.quiz-card{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:var(--r-lg);
+  padding:30px 30px 26px;box-shadow:var(--shadow-2);min-height:300px;display:flex;flex-direction:column}
+.quiz-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
+.quiz-top .qmeta{font-size:12.5px;color:var(--text-3);font-variant-numeric:tabular-nums}
+.quiz-top .qtag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:980px;background:var(--surface-2);color:var(--text-2)}
+.quiz-prog{height:5px;background:var(--surface-3);border-radius:980px;overflow:hidden;margin-bottom:22px}
+.quiz-prog > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a-tint),var(--b-tint));transition:width .35s var(--ease)}
+.quiz-q{font-size:20px;font-weight:600;letter-spacing:-.01em;line-height:1.35;margin-bottom:20px}
+.quiz-q .n{color:var(--a-tint);margin-right:8px}
+.opts{display:flex;flex-direction:column;gap:10px;flex:1}
+.opt{font-family:var(--font);text-align:left;background:var(--surface-2);border:1.5px solid var(--hairline-soft);
+  color:var(--text);font-size:15px;padding:14px 16px;border-radius:var(--r-sm);cursor:pointer;transition:.15s var(--ease);
+  display:flex;align-items:center;gap:12px}
+.opt .key{flex:0 0 auto;width:24px;height:24px;border-radius:7px;background:var(--surface);border:1px solid var(--hairline);
+  display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--text-3);font-family:var(--mono)}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--surface)}
+.opt:disabled{cursor:default}
+.opt.correct{background:rgba(40,180,110,.14);border-color:#28b46e}
+.opt.correct .key{background:#28b46e;color:#fff;border-color:#28b46e}
+.opt.wrong{background:rgba(225,70,70,.13);border-color:#e14646}
+.opt.wrong .key{background:#e14646;color:#fff;border-color:#e14646}
+.opt.dim{opacity:.5}
+.quiz-fb{margin-top:18px;font-size:14px;padding:14px 16px;border-radius:var(--r-sm);display:none;line-height:1.5}
+.quiz-fb.show{display:block}
+.quiz-fb.ok{background:rgba(40,180,110,.10);color:var(--text)}
+.quiz-fb.no{background:rgba(225,70,70,.09);color:var(--text)}
+.quiz-fb b{font-weight:700}
+.quiz-actions{display:flex;justify-content:space-between;align-items:center;margin-top:22px;gap:12px}
+.btn{font-family:var(--font);font-size:14.5px;font-weight:500;border-radius:980px;padding:11px 22px;cursor:pointer;border:1px solid transparent;transition:.15s}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-press)}
+.btn.primary:disabled{opacity:.4;cursor:default}
+.btn.ghost{background:var(--surface-2);color:var(--text);border-color:var(--hairline-soft)}
+.btn.ghost:hover{background:var(--surface-3)}
+
+/* results ring */
+.results{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:var(--r-lg);
+  padding:40px 30px;box-shadow:var(--shadow-2);text-align:center;display:none}
+.results.show{display:block}
+.ring-wrap{position:relative;width:180px;height:180px;margin:0 auto 22px}
+.ring-wrap svg{transform:rotate(-90deg)}
+.ring-wrap .pct{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-wrap .pct .big{font-size:42px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.ring-wrap .pct .sub{font-size:12.5px;color:var(--text-3)}
+.results h3{font-size:24px;letter-spacing:-.02em;margin:0 0 8px}
+.results p.msg{color:var(--text-2);font-size:15px;max-width:440px;margin:0 auto 24px}
+.results .breakdown{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:26px}
+.results .bd{background:var(--surface-2);border:1px solid var(--hairline-soft);border-radius:var(--r-sm);padding:10px 14px;font-size:12.5px}
+.results .bd .n{font-weight:700;font-size:16px;display:block}
+
+footer{border-top:1px solid var(--hairline-soft);margin-top:80px;padding:36px 0;color:var(--text-3);font-size:13px;text-align:center}
+
+@media(max-width:920px){
+  .sidebar{display:none}
+  main{padding:0 20px 100px}
+  .menu-btn{display:block}
+  .sidebar.open{display:block;position:fixed;top:var(--top-h);left:0;bottom:0;z-index:90;width:84%;max-width:320px;
+    background:var(--bg);box-shadow:var(--shadow-2);border-right:1px solid var(--hairline)}
+  .scrim{display:none;position:fixed;inset:var(--top-h) 0 0;background:rgba(0,0,0,.3);z-index:80}
+  .scrim.show{display:block}
+}
+@media(min-width:921px){.scrim{display:none}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+  <span class="brand"><b>NMT</b> · New Marketing Trends</span>
+  <span class="spacer"></span>
+  <span class="search-wrap">
+    <svg viewBox="0 0 24 24"><path d="M21.7 20.3l-5.4-5.4a8 8 0 10-1.4 1.4l5.4 5.4a1 1 0 001.4-1.4zM4 10a6 6 0 1112 0 6 6 0 01-12 0z"/></svg>
+    <input id="search" type="search" placeholder="Search topics…" aria-label="Search">
+  </span>
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">◐</button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <h4>Foundations &amp; Strategy</h4>
+    <a href="#t1" class="a"><span class="dot a"></span>1 · Introduction</a>
+    <a href="#t2" class="a"><span class="dot a"></span>2 · Marketing 5.0</a>
+    <a href="#t3" class="a"><span class="dot a"></span>3 · Product to Brand</a>
+    <a href="#t4" class="a"><span class="dot a"></span>4 · Storytelling</a>
+    <h4>Digital Channels &amp; Tactics</h4>
+    <a href="#t5" class="b"><span class="dot b"></span>5 · Mobile Marketing</a>
+    <a href="#t6" class="b"><span class="dot b"></span>6 · SEO &amp; SEM</a>
+    <a href="#t7" class="b"><span class="dot b"></span>7 · Digital Advertising</a>
+    <a href="#t8" class="b"><span class="dot b"></span>8 · Personal Branding</a>
+    <a href="#t9" class="b"><span class="dot b"></span>9 · Advergaming &amp; Inbound</a>
+    <h4>Study tools</h4>
+    <a href="#flashcards"><span class="dot a"></span>Flashcards</a>
+    <a href="#selfcheck"><span class="dot a"></span>Self-check</a>
+    <a href="#glossary"><span class="dot b"></span>Glossary</a>
+    <a href="#quiz"><span class="dot b"></span>Final quiz (50)</a>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">NMT · TecnoCampus</div>
+      <h1>New Marketing<br><span class="grad">Trends</span></h1>
+      <p class="lead">A complete revision guide — nine topics from marketing fundamentals to programmatic ads, with flashcards, a glossary and a 50-question exam.</p>
+      <div class="meta">
+        <span class="chip"><span class="d a"></span>4 foundation topics</span>
+        <span class="chip"><span class="d b"></span>5 digital topics</span>
+        <span class="chip">50-question quiz</span>
+      </div>
+    </section>
+
+    <div class="howto">
+      <h3>How to use this guide</h3>
+      <p>Built for active revision, not passive reading. Work through each topic, then test yourself.</p>
+      <div class="grid">
+        <div class="g"><div class="t"><svg viewBox="0 0 24 24"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h12v2H3z"/></svg>Summary first</div><div class="d">Each topic opens with a Key takeaways card before the full detail.</div></div>
+        <div class="g"><div class="t"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg>Expand to learn</div><div class="d">Open the "Full detail" panels to test recall, then check yourself.</div></div>
+        <div class="g"><div class="t"><svg viewBox="0 0 24 24"><path d="M4 4h16v12H5.2L4 17.2zM6 8v2h12V8zm0 4v2h8v-2z"/></svg>Flashcards</div><div class="d">Flip cards for spaced retrieval; filter by block.</div></div>
+        <div class="g"><div class="t"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"/></svg>Final quiz</div><div class="d">50 mixed questions, one at a time, with instant feedback and a score.</div></div>
+      </div>
+    </div>
+
+    <!-- ===================== BLOCK A ===================== -->
+    <div class="block-head a" id="blockA">
+      <div class="k">Block A</div>
+      <h2>Foundations &amp; Strategy</h2>
+      <div class="rule"></div>
+    </div>
+
+    <!-- TOPIC 1 -->
+    <section class="topic a" id="t1">
+      <div class="num">TOPIC 01</div>
+      <h3 class="tt">Introduction to Marketing <span class="tag">Foundations</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li>Kotler's definition: marketing = <b>managing profitable customer relationships</b> — create value for customers to capture value in return.</li>
+          <li>Marketing evolved across five eras: <b>1.0 product → 2.0 customer → 3.0 human → 4.0 digital → 5.0 technology for humanity</b>.</li>
+          <li>A <b>need</b> is a basic requirement; a <b>desire</b> is the specific, culturally-shaped way to satisfy it.</li>
+          <li>Core strategy is <b>STP</b>: Segmentation → Targeting → Positioning, ending in a <b>differential advantage</b>.</li>
+          <li>A <b>perceptual map</b> shows how brands are perceived versus competitors on key attributes.</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <h5>What is marketing?</h5>
+          <div class="quote">"…marketing is managing profitable customer relationships. The aim of marketing is to create value for customers in order to capture value from customers in return."<span class="src">Kotler &amp; Armstrong (2014)</span></div>
+          <p>Marketing was not always relationship-focused. Earlier definitions were transactional: <b>Denner (1971)</b> framed it as the permanent analysis of demand plus the means to satisfy it profitably; <b>Baker (1987)</b> as a process of <b>exchange</b> for mutual benefit and satisfaction.</p>
+          <h5>The evolution of marketing (1.0 → 5.0)</h5>
+          <figure>
+            <svg viewBox="0 0 760 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Marketing 1.0 to 5.0">
+              <defs><marker id="ah1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#0071e3"/></marker></defs>
+              <line x1="40" y1="75" x2="720" y2="75" stroke="#0071e3" stroke-width="2" marker-end="url(#ah1)"/>
+              <g font-family="sans-serif" text-anchor="middle">
+                <g><circle cx="80" cy="75" r="9" fill="#0071e3"/><text x="80" y="45" fill="currentColor" font-size="13" font-weight="700">1.0</text><text x="80" y="105" fill="#86868b" font-size="11">Product</text></g>
+                <g><circle cx="220" cy="75" r="9" fill="#2a8de0"/><text x="220" y="45" fill="currentColor" font-size="13" font-weight="700">2.0</text><text x="220" y="105" fill="#86868b" font-size="11">Customer</text></g>
+                <g><circle cx="360" cy="75" r="9" fill="#3f9add"/><text x="360" y="45" fill="currentColor" font-size="13" font-weight="700">3.0</text><text x="360" y="105" fill="#86868b" font-size="11">Human</text></g>
+                <g><circle cx="500" cy="75" r="9" fill="#34a98a"/><text x="500" y="45" fill="currentColor" font-size="13" font-weight="700">4.0</text><text x="500" y="105" fill="#86868b" font-size="11">Digital</text></g>
+                <g><circle cx="650" cy="75" r="9" fill="#1d8a5e"/><text x="650" y="45" fill="currentColor" font-size="13" font-weight="700">5.0</text><text x="650" y="105" fill="#86868b" font-size="11">Tech+humanity</text></g>
+              </g>
+            </svg>
+            <figcaption>Five eras of marketing. Source: Kotler, Kartajaya &amp; Setiawan (2021).</figcaption>
+          </figure>
+          <ul>
+            <li><b>1.0 — product-centric:</b> focus on making and selling the product.</li>
+            <li><b>2.0 — customer-centric:</b> satisfy and retain the customer.</li>
+            <li><b>3.0 — human-centric:</b> values, emotions, the human spirit.</li>
+            <li><b>4.0 — digital-centric:</b> blends online &amp; offline interaction.</li>
+            <li><b>5.0 — technology for humanity:</b> tech mimics human marketers to create value.</li>
+          </ul>
+          <h5>Needs vs. desire</h5>
+          <p>A <b>need</b> is a basic requirement (hunger, safety). A <b>desire/want</b> is the specific, culturally-shaped way a person chooses to satisfy it. Marketing works largely on shaping and channeling desire.</p>
+          <h5>STP — the strategic sequence</h5>
+          <figure>
+            <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="STP model">
+              <g font-family="sans-serif">
+                <rect x="30" y="35" width="190" height="55" rx="10" fill="none" stroke="#0071e3"/><text x="125" y="60" text-anchor="middle" fill="currentColor" font-size="14" font-weight="700">Segmentation</text><text x="125" y="78" text-anchor="middle" fill="#86868b" font-size="10.5">split market into groups</text>
+                <rect x="255" y="35" width="190" height="55" rx="10" fill="none" stroke="#3f9add"/><text x="350" y="60" text-anchor="middle" fill="currentColor" font-size="14" font-weight="700">Targeting</text><text x="350" y="78" text-anchor="middle" fill="#86868b" font-size="10.5">choose segment(s)</text>
+                <rect x="480" y="35" width="190" height="55" rx="10" fill="none" stroke="#1d8a5e"/><text x="575" y="60" text-anchor="middle" fill="currentColor" font-size="14" font-weight="700">Positioning</text><text x="575" y="78" text-anchor="middle" fill="#86868b" font-size="10.5">differential advantage</text>
+                <path d="M225 62 L250 62" stroke="#86868b" stroke-width="2"/><path d="M245 58 L253 62 L245 66 Z" fill="#86868b"/>
+                <path d="M450 62 L475 62" stroke="#86868b" stroke-width="2"/><path d="M470 58 L478 62 L470 66 Z" fill="#86868b"/>
+              </g>
+            </svg>
+            <figcaption>STP: Segmentation → Targeting → Positioning.</figcaption>
+          </figure>
+          <p><b>Segmentation</b> divides a market into subsets with common needs (geographic, demographic, psychographic, behavioural; in B2B by business units). A <b>customer persona</b> is a semi-fictional profile of a key segment. <b>Positioning</b> builds a <b>differential advantage</b> so the offer is preferred over competitors'.</p>
+          <h5>The perceptual map</h5>
+          <p>Displays how brands are perceived relative to each other on key attributes (e.g. price vs. quality) — useful to spot gaps and decide where to position.</p>
+          <figure>
+            <svg viewBox="0 0 360 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Perceptual map example">
+              <g font-family="sans-serif">
+                <line x1="180" y1="26" x2="180" y2="300" stroke="#d2d2d7" stroke-width="1.5"/>
+                <line x1="34" y1="163" x2="330" y2="163" stroke="#d2d2d7" stroke-width="1.5"/>
+                <text x="180" y="18" text-anchor="middle" fill="#86868b" font-size="11">High convenience</text>
+                <text x="180" y="314" text-anchor="middle" fill="#86868b" font-size="11">Low convenience</text>
+                <text x="38" y="159" fill="#86868b" font-size="11">Low quality</text>
+                <text x="326" y="159" text-anchor="end" fill="#86868b" font-size="11">High quality</text>
+                <circle cx="255" cy="78" r="7" fill="#0071e3"/><text x="265" y="82" fill="currentColor" font-size="11">Nespresso</text>
+                <circle cx="130" cy="100" r="7" fill="#3f9add"/><text x="120" y="96" text-anchor="end" fill="currentColor" font-size="11">Dolce Gusto</text>
+                <circle cx="110" cy="230" r="7" fill="#1d8a5e"/><text x="122" y="234" fill="currentColor" font-size="11">Nescafé (instant)</text>
+              </g>
+            </svg>
+            <figcaption>Illustrative perceptual map of coffee brands on quality vs. convenience (as in the Nescafé / Dolce Gusto / Nespresso example).</figcaption>
+          </figure>
+        </div>
+      </details>
+    </section>
+
+    <!-- TOPIC 2 -->
+    <section class="topic a" id="t2">
+      <div class="num">TOPIC 02</div>
+      <h3 class="tt">Marketing 5.0 <span class="tag">Foundations</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li>Marketing 5.0 = <b>technology that mimics humans</b> to create, deliver and enhance value across the journey.</li>
+          <li>Five components: <b>2 disciplines</b> (Data-Driven, Agile) + <b>3 applications</b> (Predictive, Contextual, Augmented).</li>
+          <li><b>IDFA</b> (Identifier For Advertisers) + <b>ATT</b> (App Tracking Transparency) reshaped tracking around privacy &amp; trust.</li>
+          <li><b>CTV</b> (Connected TV) is a fast-growing channel; most ad spend has shifted to internet/digital.</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <h5>Benefits of Marketing 5.0</h5>
+          <ul>
+            <li>More <b>informed decisions</b> from big data.</li>
+            <li><b>Predict</b> outcomes of strategies/tactics.</li>
+            <li>Bring the <b>contextual digital experience</b> into the physical world.</li>
+            <li><b>Augment</b> frontline marketers' capacity.</li>
+            <li><b>Speed up</b> execution.</li>
+          </ul>
+          <h5>The five components</h5>
+          <figure>
+            <svg viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Marketing 5.0 components">
+              <g font-family="sans-serif" font-size="12" text-anchor="middle">
+                <text x="130" y="22" fill="#0071e3" font-weight="700" font-size="12.5">DISCIPLINES</text>
+                <text x="130" y="38" fill="#86868b" font-size="10">foundations</text>
+                <rect x="40" y="48" width="180" height="40" rx="9" fill="rgba(0,113,227,.08)" stroke="#0071e3"/><text x="130" y="73" fill="currentColor" font-weight="600">Data-Driven</text>
+                <rect x="40" y="98" width="180" height="40" rx="9" fill="rgba(0,113,227,.08)" stroke="#0071e3"/><text x="130" y="123" fill="currentColor" font-weight="600">Agile</text>
+                <text x="390" y="22" fill="#1d8a5e" font-weight="700" font-size="12.5">APPLICATIONS</text>
+                <text x="390" y="38" fill="#86868b" font-size="10">what they enable</text>
+                <rect x="300" y="48" width="180" height="34" rx="9" fill="rgba(29,138,94,.08)" stroke="#1d8a5e"/><text x="390" y="69" fill="currentColor" font-weight="600">Predictive</text>
+                <rect x="300" y="90" width="180" height="34" rx="9" fill="rgba(29,138,94,.08)" stroke="#1d8a5e"/><text x="390" y="111" fill="currentColor" font-weight="600">Contextual</text>
+                <rect x="300" y="132" width="180" height="34" rx="9" fill="rgba(29,138,94,.08)" stroke="#1d8a5e"/><text x="390" y="153" fill="currentColor" font-weight="600">Augmented</text>
+                <path d="M222 110 C260 110, 262 95, 298 80" fill="none" stroke="#d2d2d7" stroke-width="1.5"/>
+                <path d="M222 113 C260 113, 262 107, 298 107" fill="none" stroke="#d2d2d7" stroke-width="1.5"/>
+                <path d="M222 116 C260 116, 262 135, 298 149" fill="none" stroke="#d2d2d7" stroke-width="1.5"/>
+                <text x="260" y="205" fill="#86868b" font-size="11" text-anchor="middle">Disciplines power the applications across the customer journey</text>
+              </g>
+            </svg>
+            <figcaption>Marketing 5.0: two disciplines underpin three applications. Source: Kotler, Kartajaya &amp; Setiawan (2021).</figcaption>
+          </figure>
+          <table class="cmp">
+            <tr><th>Type</th><th>Component</th><th>Meaning</th></tr>
+            <tr><td>Discipline</td><td><b>Data-Driven</b></td><td>Use big data to collect, analyse and optimise decisions.</td></tr>
+            <tr><td>Discipline</td><td><b>Agile</b></td><td>Decentralised teams, fast deployment, high adaptability.</td></tr>
+            <tr><td>Application</td><td><b>Predictive</b></td><td>Anticipate outcomes (customer, product, brand).</td></tr>
+            <tr><td>Application</td><td><b>Contextual</b></td><td>Personalised info, customised interaction, total immersion.</td></tr>
+            <tr><td>Application</td><td><b>Augmented</b></td><td>Tiered interfaces + digital tools for frontliners.</td></tr>
+          </table>
+          <h5>Privacy: IDFA &amp; ATT</h5>
+          <p><b>IDFA</b> is a per-device identifier enabling cross-device tracking. <b>ATT</b> is Apple's framework requiring user opt-in before tracking. Together they shift power around <b>data monopoly, privacy and trust</b> — tracking becomes trust-reliant.</p>
+          <h5>The CTV avalanche</h5>
+          <p><b>Connected TV</b> blends the reach of TV with digital's targeting and measurement. Globally, internet/digital now takes the dominant share of forecast ad spend versus TV, outdoor, print and radio.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- TOPIC 3 -->
+    <section class="topic a" id="t3">
+      <div class="num">TOPIC 03</div>
+      <h3 class="tt">From Product to Brand <span class="tag">Foundations</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li>Differentiate through four levers: <b>experience, values, extended product, connection with the brand</b>.</li>
+          <li>Move brands from <b>awareness to relevance</b> — relevance = connecting with desires, needs &amp; aspirations.</li>
+          <li>Kotler's modern path is the <b>5 A's</b>: Aware → Appeal → Ask → Act → Advocate.</li>
+          <li>Journeys are digital-dominated — in the automotive case, ~19 of ~24 touchpoints were digital.</li>
+          <li>Shift from transactions to <b>relationships</b>.</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <h5>Differentiation in the 21st century</h5>
+          <p>Four levers: <b>experience, values, extended product, connection with the brand</b>. "The fastest route to a customer's heart is through their emotions."</p>
+          <ul>
+            <li><b>Nike:</b> runners' community, Nike+ Run Club &amp; Training Club, Apple Watch — extended product + connection.</li>
+            <li><b>Apple "Today at Apple":</b> experiential activities (photography, coding, editing) — differentiation via experience.</li>
+            <li><b>Starbucks:</b> app/rewards, AI personalisation, Reserve Roasteries — personalised marketing + experience.</li>
+          </ul>
+          <h5>Levels of "experience" — points of impact</h5>
+          <p>
+            <span class="pill">On the road</span><span class="pill">Conventions</span><span class="pill">Office visits</span>
+            <span class="pill">Pop-up stores</span><span class="pill">Physical stores</span><span class="pill">Fairs (VR/AR)</span>
+            <span class="pill">Street marketing</span><span class="pill">Malls</span><span class="pill">Point-of-sale</span><span class="pill">Online</span>
+          </p>
+          <p>Pop-up stores get new eyes on the brand; fairs make a statement and involve the audience with VR/AR; street marketing pushes <b>awareness → relevance</b>.</p>
+          <h5>From awareness to relevance</h5>
+          <p>A brand is <b>relevant</b> when it connects with the desires, needs and aspirations of its audience — making lives easier and surprising them continuously. Everything relies on the <b>relationship</b>: fewer transactions, more relationships (acquisition costs, conversations, content).</p>
+          <h5>The customer journey (5 A's)</h5>
+          <figure>
+            <svg viewBox="0 0 720 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="5A journey">
+              <g font-family="sans-serif" text-anchor="middle">
+                <line x1="40" y1="55" x2="690" y2="55" stroke="#d2d2d7" stroke-width="6"/>
+                <g><circle cx="70" cy="55" r="13" fill="#0071e3"/><text x="70" y="60" fill="#fff" font-size="12" font-weight="700">A</text><text x="70" y="90" fill="#86868b" font-size="11">Aware</text></g>
+                <g><circle cx="210" cy="55" r="13" fill="#2a8de0"/><text x="210" y="60" fill="#fff" font-size="12" font-weight="700">A</text><text x="210" y="90" fill="#86868b" font-size="11">Appeal</text></g>
+                <g><circle cx="350" cy="55" r="13" fill="#3f9add"/><text x="350" y="60" fill="#fff" font-size="12" font-weight="700">A</text><text x="350" y="90" fill="#86868b" font-size="11">Ask</text></g>
+                <g><circle cx="490" cy="55" r="13" fill="#34a98a"/><text x="490" y="60" fill="#fff" font-size="12" font-weight="700">A</text><text x="490" y="90" fill="#86868b" font-size="11">Act</text></g>
+                <g><circle cx="650" cy="55" r="13" fill="#1d8a5e"/><text x="650" y="60" fill="#fff" font-size="12" font-weight="700">A</text><text x="650" y="90" fill="#86868b" font-size="11">Advocate</text></g>
+              </g>
+            </svg>
+            <figcaption>Kotler's 5A path. Source: Kotler, Kartajaya &amp; Setiawan (2017).</figcaption>
+          </figure>
+          <p>In the classic automotive example, out of ~24 touchpoints, <b>19 were digital</b> — so traditional and digital marketing must work together.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- TOPIC 4 -->
+    <section class="topic a" id="t4">
+      <div class="num">TOPIC 04</div>
+      <h3 class="tt">Storytelling &amp; Content Marketing <span class="tag">Foundations</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li><b>Storytelling</b> = connecting with an audience through a story that has meaning to them.</li>
+          <li>The <b>Hero's Journey</b> (Joseph Campbell) is the recurring structure: known → unknown → abyss → transformation → return.</li>
+          <li>Build a story in 5 steps; the <b>brand is context, not the protagonist</b>; characters showcase its values.</li>
+          <li>The more <b>vulnerable</b> the character, the closer the audience feels.</li>
+          <li>Modern cases: <b>Liquid Death</b> (entertainment), <b>Ryanair</b> (radical transparency), <b>Burger King</b> (telling without telling).</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <h5>What is storytelling?</h5>
+          <p>Connecting with an audience, using any medium (language, words, images, video, audio), through a story that has meaning to them. Forms evolved: <b>Spoken → Visual → Written → Audiovisual → Interactive</b>.</p>
+          <p>All great stories share: <span class="pill">Setting</span><span class="pill">Characters</span><span class="pill">Plot</span><span class="pill">Conflict</span><span class="pill">Theme</span><span class="pill">Narrative arc</span></p>
+          <h5>The Hero's Journey (Joseph Campbell)</h5>
+          <figure>
+            <svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hero's journey">
+              <circle cx="160" cy="150" r="115" fill="none" stroke="#d2d2d7" stroke-width="2"/>
+              <line x1="45" y1="150" x2="275" y2="150" stroke="#0071e3" stroke-width="1.5" stroke-dasharray="5 5"/>
+              <text x="95" y="142" text-anchor="middle" fill="#86868b" font-size="11" font-style="italic">KNOWN</text>
+              <text x="225" y="142" text-anchor="middle" fill="#86868b" font-size="11" font-style="italic">UNKNOWN</text>
+              <g font-family="sans-serif" font-size="10" fill="currentColor" text-anchor="middle">
+                <text x="160" y="44">Call to adventure</text>
+                <text x="255" y="105">Threshold</text>
+                <text x="272" y="155">Challenges</text>
+                <text x="252" y="210">Abyss / rebirth</text>
+                <text x="160" y="275">Transformation</text>
+                <text x="62" y="210">Revelation</text>
+                <text x="48" y="155">Atonement</text>
+                <text x="64" y="105">Return (gift)</text>
+              </g>
+              <circle cx="160" cy="150" r="5" fill="#1d8a5e"/>
+            </svg>
+            <figcaption>The Hero's Journey, after Joseph Campbell ("The Hero With a Thousand Faces", 1949).</figcaption>
+          </figure>
+          <h5>Building a brand story — 5 steps</h5>
+          <ol>
+            <li><b>Define who to connect with</b> — know their thoughts, fears, desires, needs at the moment of the message.</li>
+            <li><b>Ideas &amp; values</b> to convey — values relate to fidelity; connect message → details → consequence (Ben &amp; Jerry's climate strike).</li>
+            <li><b>Emotions</b> — empathise via a concern, need or fear; resolve so the brand association is positive (UNICEF).</li>
+            <li><b>Narrative structure.</b></li>
+            <li><b>Characters</b> — something happens to them; the <b>brand is context, not the hero</b>; characters showcase brand values.</li>
+          </ol>
+          <p><b>Vulnerability principle:</b> the more vulnerable a character seems, the closer the audience feels — bonding with authentic, struggling characters around love, hope, fear, adventure and effort.</p>
+          <h5>Types of stories</h5>
+          <table class="cmp">
+            <tr><th>Type</th><th>Idea</th></tr>
+            <tr><td>Fiction</td><td>Made-up characters/situations.</td></tr>
+            <tr><td>Historical</td><td>Experience, reputation, nostalgia.</td></tr>
+            <tr><td>Real-life situations</td><td>Users see themselves in the use cases.</td></tr>
+            <tr><td>Based on brand values</td><td>Audience links brand to characters' values.</td></tr>
+            <tr><td>"Who am I?"</td><td>Intro story about the brand's history.</td></tr>
+            <tr><td>Telling without telling</td><td>Implied narrative &amp; reaction (Burger King).</td></tr>
+          </table>
+          <h5>Modern cases</h5>
+          <ul>
+            <li><b>Liquid Death — entertainment:</b> water is a boring commodity, so market "murdering your thirst", not "hydration" (the boring-product paradox).</li>
+            <li><b>Ryanair — radical transparency:</b> embrace the villain arc; agree with haters and roast back; zero production value; admitting they're cheap builds trust.</li>
+            <li><b>Burger King / Wendy's:</b> playful reactive social presence ("hamberders").</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <!-- ===================== BLOCK B ===================== -->
+    <div class="block-head b" id="blockB">
+      <div class="k">Block B</div>
+      <h2>Digital Channels &amp; Tactics</h2>
+      <div class="rule"></div>
+    </div>
+
+    <!-- TOPIC 5 -->
+    <section class="topic b" id="t5">
+      <div class="num">TOPIC 05</div>
+      <h3 class="tt">Mobile Marketing <span class="tag">Digital</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li><b>MMA:</b> engage audiences interactively through and with any mobile device or network.</li>
+          <li><b>Push</b> = brand-initiated; <b>Pull</b> = user-initiated.</li>
+          <li>Formats: <b>SMS/MMS (~98% open)</b>, QR (offline→online), push notifications, geofencing.</li>
+          <li>Apps act as loyalty tool, distribution channel and revenue source; in-app converts <b>~+130%</b> vs mobile browser.</li>
+          <li><b>ASO</b> improves store visibility; key challenges include ~28% quick uninstalls and privacy rules.</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <div class="quote">"Mobile Marketing is a set of practices that enables organizations to communicate and engage with their audience in an interactive and relevant manner through and with any mobile device or network."<span class="src">Mobile Marketing Association (2020)</span></div>
+          <h5>Key facts</h5>
+          <p>60%+ of global web traffic is mobile; users spend 4+ hours daily on devices; channels include apps, SMS, QR codes and in-app ads.</p>
+          <h5>Push vs. pull</h5>
+          <table class="cmp">
+            <tr><th>Push</th><th>Pull</th></tr>
+            <tr><td>Brand sends the message (push notifications, SMS).</td><td>User requests it (search, scan a QR, open an app).</td></tr>
+          </table>
+          <h5>Benefits &amp; formats</h5>
+          <p><b>Benefits:</b> personalisation &amp; segmentation, immediate response, interactivity, engaging experiences. <b>Formats:</b> SMS/MMS (~98% open), QR (offline-to-online bridge), push notifications, geofencing (location targeting); plus web banners, mobile web, AR, VR, m-commerce, apps. <b>Cons:</b> small screen, technical limits, constrained GUI.</p>
+          <h5>Segmentation &amp; tracking</h5>
+          <p><b>Segment by:</b> OS, device, screen size, features, location, enriched data. <b>Track via:</b> clicks/taps, geolocation, SMS/IM, app interaction, cross-site tracking.</p>
+          <h5>Apps in marketing</h5>
+          <p>An app is a <b>loyalty tool</b>, a <b>distribution channel</b> and a <b>revenue source</b>. Value: personalisation at scale, loyalty &amp; gamification, first-party data, differentiation/positioning, a controlled environment at the purchase decision, two-way communication.</p>
+          <figure>
+            <svg viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="App vs browser funnel">
+              <g font-family="sans-serif" font-size="12">
+                <text x="130" y="18" text-anchor="middle" fill="#86868b" font-weight="700">Mobile browser</text>
+                <text x="390" y="18" text-anchor="middle" fill="#1d8a5e" font-weight="700">App</text>
+                <rect x="40" y="30" width="180" height="24" rx="5" fill="#e8e8ed"/><text x="130" y="47" text-anchor="middle" fill="#1d1d1f">Viewed 5.7 / user</text>
+                <rect x="300" y="30" width="180" height="24" rx="5" fill="rgba(29,138,94,.18)"/><text x="390" y="47" text-anchor="middle" fill="#1d1d1f">Viewed 22.0 / user</text>
+                <rect x="60" y="66" width="140" height="24" rx="5" fill="#e8e8ed"/><text x="130" y="83" text-anchor="middle" fill="#1d1d1f">Add-to-basket 13%</text>
+                <rect x="320" y="66" width="140" height="24" rx="5" fill="rgba(29,138,94,.18)"/><text x="390" y="83" text-anchor="middle" fill="#1d1d1f">Add-to-basket 24%</text>
+                <rect x="80" y="102" width="100" height="24" rx="5" fill="#e8e8ed"/><text x="130" y="119" text-anchor="middle" fill="#1d1d1f">Purchase 44%</text>
+                <rect x="340" y="102" width="100" height="24" rx="5" fill="rgba(29,138,94,.18)"/><text x="390" y="119" text-anchor="middle" fill="#1d1d1f">Purchase 54%</text>
+                <text x="260" y="155" text-anchor="middle" fill="#1d8a5e" font-weight="700">Conversion rate: +130% in-app</text>
+              </g>
+            </svg>
+            <figcaption>Global retail conversion funnel by channel — apps convert far better than browsers.</figcaption>
+          </figure>
+          <h5>ASO &amp; challenges</h5>
+          <p><b>ASO (App Store Optimization)</b> improves visibility/ranking via downloads, installs, engagement, reviews. <b>Challenges:</b> high uninstall rates (~28% uninstalled quickly), privacy regulation (GDPR, iOS), UX/UI issues, platform restrictions. Cases: IKEA (AR) and Sephora (app + in-store).</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- TOPIC 6 -->
+    <section class="topic b" id="t6">
+      <div class="num">TOPIC 06</div>
+      <h3 class="tt">SEO &amp; SEM <span class="tag">Digital</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li><b>SEO</b> = organic traffic via search results (MOZ); engines work Crawl → Index → Rank.</li>
+          <li>Three search intents: <b>informational, transactional, navigational</b> — each with different SERP features.</li>
+          <li>Search is shifting to <b>GEO</b> (cited by AI answers) and <b>AEO</b> (direct answers); strengthen <b>E-E-A-T</b>.</li>
+          <li><b>Long-tail</b> keywords carry ~70% of traffic; fat head ~18.5%, chunky middle ~11.5%.</li>
+          <li><b>SEM = paid</b> search visibility; SEO = organic. Avoid black-hat (cloaking, keyword stuffing).</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <h5>What is SEO?</h5>
+          <div class="quote">Search Engine Optimization is the practice of increasing the quantity and quality of traffic to your website through organic search engine results.<span class="src">MOZ (2018)</span></div>
+          <p>Building blocks: keywords, meta tags, content, link building, speed, HTTPS, mobile &amp; voice. Engines <b>Crawl → Index → Rank</b> and surface SERP features (videos, images). Discovery uses external links (follow/no-follow), Search Console, <code>robots.txt</code>, <code>sitemap.xml</code>.</p>
+          <h5>Search intent</h5>
+          <table class="cmp">
+            <tr><th>Intent</th><th>Example</th><th>Typical SERP</th></tr>
+            <tr><td><b>Informational</b></td><td>"What is the Metaverse?"</td><td>AI Overview, Featured Snippets, Knowledge Graph, PAA, organic.</td></tr>
+            <tr><td><b>Transactional</b></td><td>"Nike running shoes on sale"</td><td>Shopping Ads, Popular Products, organic.</td></tr>
+            <tr><td><b>Navigational</b></td><td>"Zara store Barcelona"</td><td>Local Map Pack, PAA, reviews, video carousel.</td></tr>
+          </table>
+          <h5>The future: SEO → GEO → AEO</h5>
+          <p>By 2026 ~30% of searches will occur through AI engines (Gartner, 2024). <b>GEO (Generative Engine Optimization):</b> being <b>cited</b> by AI answers (Query → LLM retrieval/RAG → summarization → response → citation). <b>AEO (Answer Engine Optimization):</b> optimising for direct answers (snippets, FAQ schema, voice).</p>
+          <p><b>Make AI choose you:</b> structured data (schema, FAQs, JSON-LD); clear factual answers; strengthen <b>E-E-A-T</b> (Experience, Expertise, Authoritativeness, Trust); unique data-backed insights; LLM-friendly site.</p>
+          <h5>Keywords &amp; the search demand curve</h5>
+          <figure>
+            <svg viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Search demand curve">
+              <path d="M40,40 C120,40 140,150 260,165 C380,180 420,185 490,188" fill="none" stroke="#1d8a5e" stroke-width="2.5"/>
+              <line x1="40" y1="190" x2="490" y2="190" stroke="#d2d2d7"/>
+              <line x1="40" y1="30" x2="40" y2="190" stroke="#d2d2d7"/>
+              <g font-family="sans-serif" font-size="11">
+                <rect x="60" y="55" width="80" height="120" fill="rgba(29,138,94,.08)"/>
+                <text x="100" y="205" text-anchor="middle" fill="#1d8a5e" font-weight="700">Fat Head</text>
+                <text x="100" y="48" text-anchor="middle" fill="#86868b">~18.5%</text>
+                <rect x="140" y="120" width="120" height="55" fill="rgba(29,138,94,.05)"/>
+                <text x="200" y="205" text-anchor="middle" fill="#34a98a" font-weight="700">Chunky Middle</text>
+                <text x="200" y="113" text-anchor="middle" fill="#86868b">~11.5%</text>
+                <rect x="260" y="160" width="230" height="15" fill="rgba(29,138,94,.03)"/>
+                <text x="375" y="205" text-anchor="middle" fill="#0071e3" font-weight="700">Long Tail ~70%</text>
+              </g>
+            </svg>
+            <figcaption>Few high-volume "fat head" terms vs. many "long tail" terms that together carry ~70% of traffic.</figcaption>
+          </figure>
+          <p>Choose keywords by search volume but <b>don't overuse</b>. Tools: Google Keyword Planner, Google Trends, AnswerThePublic, MOZ Keyword Explorer, SEMRush.</p>
+          <h5>On-site, technical SEO &amp; linkbuilding</h5>
+          <ul>
+            <li><b>On-site:</b> title 50–60 chars, descriptions 150–300 chars, headers (h1/h2/h3), internal links, avoid duplicate content; image optimisation (weight, alt, speed, "-" in URLs); avoid chain redirects.</li>
+            <li><b>Technical:</b> domain/hosting, structured data, canonical URLs, responsive design, AMP, SRCSET &amp; lazy loading, multilingual URLs, HTTPS. <b>Black-hat:</b> cloaking, keyword stuffing.</li>
+            <li><b>Linkbuilding:</b> inbound links judged on quality, diversity, similar topics; clean anchor text; <b>E-A-T</b>.</li>
+          </ul>
+          <h5>KPIs &amp; SEM</h5>
+          <p>KPIs: engagement, conversion rate, time on page, bounce rate, scroll depth, traffic source, CTR, backlinks, speed. <b>SEM = paid</b> search ads; SEO = organic. SEM sits within paid media (online ads, social, influencer, audience networks).</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- TOPIC 7 -->
+    <section class="topic b" id="t7">
+      <div class="num">TOPIC 07</div>
+      <h3 class="tt">Digital Advertising <span class="tag">Digital</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li>Banner types: <b>trap, impulsive, retention</b>; performance depends on CTR, visibility, layout, size, frequency.</li>
+          <li>Video ad formats: <b>skippable, non-skippable, discovery, bumper (≤6s), outstream</b>.</li>
+          <li><b>Programmatic/RTB:</b> user → SSP → DSP bids → highest bid wins → ad served.</li>
+          <li>Retargeting follows the user across display, social and email.</li>
+          <li>Social ads structure: <b>Campaign → Ad Set → Ad</b>; objectives map to CPM/CPC/CPA by funnel stage.</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <h5>Formats</h5>
+          <p><b>Banners</b> (standard size/location): types are <b>trap (clickbait)</b>, <b>impulsive</b>, <b>retention</b>; performance depends on CTR, visibility, content, layout, animations, logos, size ("real estate"), rotation/frequency. "Megabanners" run on sites and social networks for notoriety. <b>Sponsorships</b> link a brand to a recognised organisation.</p>
+          <p><b>Pop-ups / intrusive:</b> <span class="pill">Interstitial</span><span class="pill">Skyscraper</span><span class="pill">Website takeover</span><span class="pill">Button</span><span class="pill">Full page</span><span class="pill">Expandable</span> — full-page takes the whole screen, is closable by a button, annoys users, but is <b>not penalised</b> by search engines.</p>
+          <p><b>Video ads (YouTube/Google):</b> skippable, non-skippable, discovery, <b>bumper (≤6s)</b>, outstream. Quality depends on content/video quality, formats, CTA/description and goals.</p>
+          <figure>
+            <svg viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Video ad formats by length">
+              <g font-family="sans-serif" font-size="11">
+                <text x="20" y="20" fill="#86868b">Length / skippability →</text>
+                <rect x="20" y="34" width="70" height="30" rx="6" fill="rgba(29,138,94,.10)" stroke="#1d8a5e"/><text x="55" y="53" text-anchor="middle" fill="currentColor" font-weight="600">Bumper</text><text x="55" y="78" text-anchor="middle" fill="#86868b">≤6s, no-skip</text>
+                <rect x="110" y="34" width="90" height="30" rx="6" fill="rgba(52,169,138,.10)" stroke="#34a98a"/><text x="155" y="53" text-anchor="middle" fill="currentColor" font-weight="600">Non-skippable</text><text x="155" y="78" text-anchor="middle" fill="#86868b">~15-20s</text>
+                <rect x="220" y="34" width="90" height="30" rx="6" fill="rgba(63,154,221,.10)" stroke="#3f9add"/><text x="265" y="53" text-anchor="middle" fill="currentColor" font-weight="600">Skippable</text><text x="265" y="78" text-anchor="middle" fill="#86868b">skip after 5s</text>
+                <rect x="330" y="34" width="80" height="30" rx="6" fill="rgba(0,113,227,.10)" stroke="#0071e3"/><text x="370" y="53" text-anchor="middle" fill="currentColor" font-weight="600">Discovery</text><text x="370" y="78" text-anchor="middle" fill="#86868b">in listings</text>
+                <rect x="430" y="34" width="70" height="30" rx="6" fill="rgba(0,113,227,.10)" stroke="#0071e3"/><text x="465" y="53" text-anchor="middle" fill="currentColor" font-weight="600">Outstream</text><text x="465" y="78" text-anchor="middle" fill="#86868b">in feeds</text>
+                <text x="20" y="120" fill="currentColor" font-size="11.5"><tspan font-weight="600">In-stream</tspan> (bumper, non-skippable, skippable) plays inside other video;</text>
+                <text x="20" y="140" fill="currentColor" font-size="11.5"><tspan font-weight="600">discovery</tspan> appears in search/related; <tspan font-weight="600">outstream</tspan> plays outside video content.</text>
+              </g>
+            </svg>
+            <figcaption>YouTube / Google video ad formats, by length and placement.</figcaption>
+          </figure>
+          <h5>Programmatic &amp; RTB</h5>
+          <figure>
+            <svg viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RTB flow">
+              <g font-family="sans-serif" font-size="11" text-anchor="middle">
+                <rect x="20" y="60" width="110" height="40" rx="8" fill="none" stroke="#1d8a5e"/><text x="75" y="84" fill="currentColor">Advertiser</text>
+                <rect x="160" y="60" width="110" height="40" rx="8" fill="none" stroke="#0071e3"/><text x="215" y="78" fill="currentColor">DSP</text><text x="215" y="92" fill="#86868b" font-size="9">demand side</text>
+                <rect x="300" y="60" width="120" height="40" rx="8" fill="none" stroke="#34a98a"/><text x="360" y="78" fill="currentColor">Ad Exchange</text><text x="360" y="92" fill="#86868b" font-size="9">auction</text>
+                <rect x="450" y="60" width="110" height="40" rx="8" fill="none" stroke="#0071e3"/><text x="505" y="78" fill="currentColor">SSP</text><text x="505" y="92" fill="#86868b" font-size="9">supply side</text>
+                <rect x="590" y="60" width="100" height="40" rx="8" fill="none" stroke="#1d8a5e"/><text x="640" y="84" fill="currentColor">Publisher</text>
+                <path d="M130 80 L158 80" stroke="#86868b" stroke-width="2"/><path d="M153 76 L161 80 L153 84 Z" fill="#86868b"/>
+                <path d="M270 80 L298 80" stroke="#86868b" stroke-width="2"/><path d="M293 76 L301 80 L293 84 Z" fill="#86868b"/>
+                <path d="M420 80 L448 80" stroke="#86868b" stroke-width="2"/><path d="M443 76 L451 80 L443 84 Z" fill="#86868b"/>
+                <path d="M560 80 L588 80" stroke="#86868b" stroke-width="2"/><path d="M583 76 L591 80 L583 84 Z" fill="#86868b"/>
+                <text x="360" y="30" fill="#86868b">User visits → SSP offers impression → DSPs bid → highest bid wins → ad served</text>
+              </g>
+            </svg>
+            <figcaption>Programmatic / RTB flow between advertiser, DSP, ad exchange, SSP and publisher.</figcaption>
+          </figure>
+          <p>Players: advertisers/publishers, ad networks, ad exchanges, <b>DSPs</b> (advertisers bid), <b>SSPs</b> (publishers offer inventory), trading desks, data providers, ad servers, <b>DMP/Ad Exchange</b> (manages data, where purchase happens). <b>RTB benefits:</b> reduces costs, guides strategy, protects brand, unifies channels, budget control, better targeting. <b>Campaign types:</b> Prospecting · Targeting · Retargeting.</p>
+          <h5>Remarketing / retargeting</h5>
+          <p>Search retargeting; display ads (personalised, across the web); social media ads; email marketing (based on prior interactions).</p>
+          <h5>Social media advertising</h5>
+          <table class="cmp">
+            <tr><th>Paid social</th><th>Organic</th></tr>
+            <tr><td>Paid &amp; targeted, faster results, measurable/optimisable (ROAS, CPC, CTR, A/B).</td><td>Earned &amp; limited reach, long-term engagement, limited control.</td></tr>
+          </table>
+          <p><b>Account structure:</b> Campaign (objective) → Ad Set (audience, budget, schedule, placements) → Ad (creative).</p>
+          <table class="cmp">
+            <tr><th>Funnel stage</th><th>Objective</th><th>Metric</th></tr>
+            <tr><td>Awareness</td><td>Reach, impressions</td><td>CPM</td></tr>
+            <tr><td>Consideration</td><td>Traffic, engagement, video views</td><td>CPC, CPV</td></tr>
+            <tr><td>Conversion</td><td>Leads, sales, app installs</td><td>CPA</td></tr>
+          </table>
+          <p><b>Targeting:</b> location, demographics, behaviour, connections, interests; <b>Custom Audiences</b> (lists, app users, site visitors); <b>Lookalike Audiences</b>. Bidding: CPC/CPM/CPA; budget daily vs lifetime; always A/B test.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- TOPIC 8 -->
+    <section class="topic b" id="t8">
+      <div class="num">TOPIC 08</div>
+      <h3 class="tt">Personal Branding <span class="tag">Digital</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li>A <b>personal brand</b> is the perception of you; <b>personal branding</b> is the conscious effort to shape it.</li>
+          <li>It does three things: <b>market yourself · convey a message · differentiate</b>.</li>
+          <li>The model has many areas (Direction, Persona, Market, Product, Brand, Image, Communication…) each with guiding questions.</li>
+          <li><b>Networking</b> is the No. 1 cause of job attainment; an <b>elevator pitch</b> is 30–90s, 90–270 words, 8–24 sentences.</li>
+          <li>Use <b>SWOT</b> and <b>brand archetypes</b>; avoid the <b>7 capital sins</b>.</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <h5>Personal brand vs personal branding</h5>
+          <p>A <b>personal brand</b> is a widely-recognised perception of an individual based on experience, expertise, competencies, actions and achievements. <b>Personal branding</b> is the conscious, intentional effort to create and influence that perception — positioning the person as an <b>authority</b>, elevating credibility, differentiating from competition. It does three things: <b>market yourself, convey a message, differentiate</b>.</p>
+          <p>What we look for: <span class="pill">Credibility</span><span class="pill">Presence</span><span class="pill">Positioning</span><span class="pill">Visibility</span><span class="pill">Job hunting</span> — through consistent personality &amp; values, pull marketing (content), and online reputation monitoring.</p>
+          <h5>The personal-branding model</h5>
+          <table class="cmp">
+            <tr><th>Area</th><th>Core question</th></tr>
+            <tr><td><b>Direction</b></td><td>Mission, vision, values — role, goal, principles.</td></tr>
+            <tr><td><b>Persona</b></td><td>What moves you, scares you, what you believe in.</td></tr>
+            <tr><td><b>Market</b></td><td>Audience, competitors, who can help, providers.</td></tr>
+            <tr><td><b>Product</b></td><td>What you do, needs satisfied, benefits (your USP).</td></tr>
+            <tr><td><b>Assets</b></td><td>Inventory of know-how, experiences, abilities.</td></tr>
+            <tr><td><b>Brand</b></td><td>Attributes that set you apart; how you build trust.</td></tr>
+            <tr><td><b>Marketing</b></td><td>How they find &amp; how you promote yourself.</td></tr>
+            <tr><td><b>Image</b></td><td>How you present yourself; elements of your image.</td></tr>
+            <tr><td><b>Communication</b></td><td>How you reach the audience; tools, relationships.</td></tr>
+            <tr><td><b>Selling</b></td><td>How you sell, pricing, formats.</td></tr>
+            <tr><td><b>Logistics</b></td><td>Resources needed; what's expendable.</td></tr>
+            <tr><td><b>Operations</b></td><td>Risks; how you improve over time.</td></tr>
+          </table>
+          <h5>Networking &amp; the elevator pitch</h5>
+          <div class="quote">"The exchange of information or services among individuals, groups, or institutions… the cultivation of productive relationships for employment or business."<span class="src">Merriam-Webster (2019)</span></div>
+          <p>Networking remains the No. 1 cause of job attainment (Lancaster, 2015). The <b>elevator pitch</b> is ~30–90 seconds, ~90–270 words, 8–24 sentences, covering: about you, what you offer, benefits. Answer: who are you? what do you do? how? what do you need? how to keep in touch?</p>
+          <h5>SWOT</h5>
+          <figure>
+            <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SWOT">
+              <g font-family="sans-serif" font-size="13" text-anchor="middle">
+                <rect x="30" y="20" width="120" height="78" fill="rgba(40,180,110,.10)" stroke="#d2d2d7"/><text x="90" y="52" fill="#1d8a5e" font-weight="700">Strengths</text><text x="90" y="70" fill="#86868b" font-size="10">internal · positive</text>
+                <rect x="170" y="20" width="120" height="78" fill="rgba(240,163,60,.12)" stroke="#d2d2d7"/><text x="230" y="52" fill="#b25000" font-weight="700">Weaknesses</text><text x="230" y="70" fill="#86868b" font-size="10">internal · negative</text>
+                <rect x="30" y="106" width="120" height="78" fill="rgba(0,113,227,.10)" stroke="#d2d2d7"/><text x="90" y="138" fill="#0071e3" font-weight="700">Opportunities</text><text x="90" y="156" fill="#86868b" font-size="10">external · positive</text>
+                <rect x="170" y="106" width="120" height="78" fill="rgba(225,70,70,.10)" stroke="#d2d2d7"/><text x="230" y="138" fill="#e14646" font-weight="700">Threats</text><text x="230" y="156" fill="#86868b" font-size="10">external · negative</text>
+              </g>
+            </svg>
+            <figcaption>SWOT: internal (Strengths/Weaknesses) vs external (Opportunities/Threats).</figcaption>
+          </figure>
+          <h5>Values, archetypes &amp; reputation</h5>
+          <p>Keep in mind: <b>Patience · Planning · Responsibility · Perseverance · Passion</b>. Personality can be framed with <b>brand archetypes</b> (Caregiver, Ruler, Sage, Explorer, Innocent, Creator, Outlaw, Magician, Everyman…), each tied to a core drive. <b>ORM</b> monitors: what they say, how, where, who, and the intention.</p>
+          <figure>
+            <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brand archetypes wheel">
+              <g font-family="sans-serif" font-size="9.5" text-anchor="middle">
+                <circle cx="170" cy="170" r="120" fill="none" stroke="#d2d2d7" stroke-width="1.5"/>
+                <circle cx="170" cy="170" r="64" fill="none" stroke="#e8e8ed" stroke-width="1"/>
+                <text x="170" y="166" fill="#86868b" font-size="9">core drives:</text>
+                <text x="170" y="178" fill="#86868b" font-size="8.5">freedom · social · order · ego</text>
+                <!-- 12 archetypes around the circle -->
+                <text x="170" y="38" fill="currentColor" font-weight="600">Innocent</text>
+                <text x="248" y="62" fill="currentColor">Sage</text>
+                <text x="300" y="120" fill="currentColor">Explorer</text>
+                <text x="316" y="174" fill="currentColor" font-weight="600">Outlaw</text>
+                <text x="300" y="226" fill="currentColor">Magician</text>
+                <text x="246" y="282" fill="currentColor">Hero</text>
+                <text x="170" y="312" fill="currentColor" font-weight="600">Everyman</text>
+                <text x="94" y="282" fill="currentColor">Lover</text>
+                <text x="40" y="226" fill="currentColor">Jester</text>
+                <text x="22" y="174" fill="currentColor" font-weight="600">Caregiver</text>
+                <text x="40" y="120" fill="currentColor">Ruler</text>
+                <text x="92" y="62" fill="currentColor">Creator</text>
+                <circle cx="170" cy="50" r="3" fill="#0071e3"/>
+                <circle cx="290" cy="170" r="3" fill="#1d8a5e"/>
+                <circle cx="170" cy="290" r="3" fill="#3f9add"/>
+                <circle cx="50" cy="170" r="3" fill="#34a98a"/>
+              </g>
+            </svg>
+            <figcaption>The 12 brand archetypes, each mapped to a core human drive (freedom, social belonging, order, ego/mastery).</figcaption>
+          </figure>
+          <p><b>7 capital sins of personal branding:</b> Falsehood · Demotivation · Inconsistency · Selfishness · Vanity · Staggering · Reckless ambition.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- TOPIC 9 -->
+    <section class="topic b" id="t9">
+      <div class="num">TOPIC 09</div>
+      <h3 class="tt">Advergaming &amp; Inbound Marketing <span class="tag">Digital</span></h3>
+      <div class="tldr">
+        <div class="lbl">Key takeaways</div>
+        <ul>
+          <li><b>Inbound</b> attracts with valuable content; <b>outbound</b> interrupts with unwanted messages (HubSpot).</li>
+          <li>Inbound methodology: <b>Attract → Convert → Close → Delight</b>.</li>
+          <li>Lead lifecycle: Generation → Qualification → Nurturing → Scoring → Distribution → CRM.</li>
+          <li>Qualification frameworks: <b>BANT, MEDDIC, CHAMP, ANUM, FAINT, GPCTBA/C&amp;I</b>; scoring is explicit (A/B/C) × implicit (1/2/3).</li>
+          <li><b>Advergaming = advertising + entertainment</b>; the <b>flow state</b> matches challenge to skill.</li>
+        </ul>
+      </div>
+      <details class="detail">
+        <summary>Full detail <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></summary>
+        <div class="detail-body">
+          <h5>Inbound vs. outbound</h5>
+          <div class="quote">Inbound marketing attracts customers by creating valuable content and experiences tailored to them. While outbound interrupts your audience with content they don't want, inbound forms connections they're looking for and solves problems they already have.<span class="src">HubSpot (2020)</span></div>
+          <h5>The inbound methodology</h5>
+          <figure>
+            <svg viewBox="0 0 640 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Inbound methodology">
+              <g font-family="sans-serif" font-size="12" text-anchor="middle">
+                <circle cx="90" cy="50" r="38" fill="rgba(0,113,227,.10)" stroke="#0071e3"/><text x="90" y="50" fill="currentColor" font-weight="700">Attract</text>
+                <circle cx="240" cy="50" r="38" fill="rgba(41,140,224,.10)" stroke="#2a8de0"/><text x="240" y="50" fill="currentColor" font-weight="700">Convert</text>
+                <circle cx="390" cy="50" r="38" fill="rgba(52,169,138,.10)" stroke="#34a98a"/><text x="390" y="50" fill="currentColor" font-weight="700">Close</text>
+                <circle cx="540" cy="50" r="38" fill="rgba(29,138,94,.10)" stroke="#1d8a5e"/><text x="540" y="50" fill="currentColor" font-weight="700">Delight</text>
+                <text x="90" y="105" fill="#86868b" font-size="10">content, e-books</text>
+                <text x="240" y="105" fill="#86868b" font-size="10">forms, CTAs, LPs</text>
+                <text x="390" y="105" fill="#86868b" font-size="10">CRM, emails</text>
+                <text x="540" y="105" fill="#86868b" font-size="10">smart content</text>
+              </g>
+            </svg>
+            <figcaption>Attract → Convert → Close → Delight.</figcaption>
+          </figure>
+          <ul>
+            <li><b>Attract:</b> content, whitepapers, e-books, templates, demos, freebies.</li>
+            <li><b>Convert:</b> forms, newsletters, CTAs, landing pages.</li>
+            <li><b>Close:</b> lead management, emails, CRM.</li>
+            <li><b>Delight:</b> personalised offers, smart content, CRM.</li>
+          </ul>
+          <h5>Lifecycle of a lead</h5>
+          <p><b>Generation → Qualification → Nurturing → Dynamic Scoring → Distribution → CRM.</b> <b>Lead magnets</b> are gated content (e-books, demos, discounts, courses) exchanged for prospect info.</p>
+          <h5>Lead qualification</h5>
+          <p><b>SAL</b> (Sales Accepted Lead) → <b>MQL/SQL</b>. Frameworks:</p>
+          <figure>
+            <svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lead qualification funnel">
+              <g font-family="sans-serif" font-size="12" text-anchor="middle">
+                <polygon points="40,30 380,30 330,70 90,70" fill="rgba(0,113,227,.10)" stroke="#0071e3"/><text x="210" y="55" fill="currentColor" font-weight="600">Lead</text>
+                <polygon points="92,76 328,76 296,116 124,116" fill="rgba(63,154,221,.12)" stroke="#3f9add"/><text x="210" y="101" fill="currentColor" font-weight="600">MQL — Marketing Qualified</text>
+                <polygon points="126,122 294,122 262,162 158,162" fill="rgba(52,169,138,.14)" stroke="#34a98a"/><text x="210" y="147" fill="currentColor" font-weight="600">SAL — Sales Accepted</text>
+                <polygon points="160,168 260,168 228,208 192,208" fill="rgba(29,138,94,.16)" stroke="#1d8a5e"/><text x="210" y="193" fill="currentColor" font-weight="600">SQL</text>
+              </g>
+            </svg>
+            <figcaption>Leads narrow down the funnel: Lead → MQL → SAL → SQL as qualification tightens.</figcaption>
+          </figure>
+          <table class="cmp">
+            <tr><th>Framework</th><th>Stands for</th></tr>
+            <tr><td><b>BANT</b></td><td>Budget · Authority · Need · Time</td></tr>
+            <tr><td><b>MEDDIC</b></td><td>Metrics · Economic buyer · Decision criteria · Decision process · Identify pain · Champion</td></tr>
+            <tr><td><b>CHAMP</b></td><td>Challenges · Authority · Money · Prioritization</td></tr>
+            <tr><td><b>ANUM</b></td><td>Authority · Need · Urgency · Money</td></tr>
+            <tr><td><b>FAINT</b></td><td>Funds · Authority · Interest · Need · Timing</td></tr>
+          </table>
+          <h5>Dynamic scoring</h5>
+          <ul>
+            <li><b>Explicit:</b> directly shared data (job, income, location, age) via forms. Scale A, B, C.</li>
+            <li><b>Implicit:</b> monitored behaviour (opened mails, clicks, forms, calls, contests). Scale 1, 2, 3.</li>
+          </ul>
+          <p>Combined, e.g. <b>A1</b> = high explicit + high implicit → hot lead. Distribution: <span class="pill">Cold</span><span class="pill">Warm</span><span class="pill">Hot</span> → CRM outreach (Prospecting → Approach → Needs → Presentation → Close → Follow-up).</p>
+          <h5>Advergaming &amp; the flow state</h5>
+          <p><b>Advergaming = advertising + entertainment</b> through (usually short) games. Spectrum: <span class="pill">Casual</span><span class="pill">Advergames</span><span class="pill">Video games</span><span class="pill">MMOGs</span><span class="pill">MMORPGs</span><span class="pill">Virtual realities</span>. Terms: avatar, community, currency, emoticons, grid, latency, universe.</p>
+          <figure>
+            <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow state">
+              <line x1="40" y1="190" x2="280" y2="190" stroke="#d2d2d7"/>
+              <line x1="40" y1="20" x2="40" y2="190" stroke="#d2d2d7"/>
+              <polygon points="40,190 250,30 250,85 95,190" fill="rgba(29,138,94,.13)"/>
+              <path d="M40,190 L250,30" stroke="#1d8a5e" stroke-width="2" stroke-dasharray="4 4"/>
+              <g font-family="sans-serif" font-size="12">
+                <text x="145" y="65" fill="#e14646" transform="rotate(-37 145 65)">Anxiety</text>
+                <text x="165" y="140" fill="#1d8a5e" font-weight="700" transform="rotate(-37 165 140)">FLOW</text>
+                <text x="150" y="182" fill="#86868b" transform="rotate(-37 150 182)">Boredom</text>
+                <text x="150" y="212" text-anchor="middle" fill="#86868b" font-size="11">Skill →</text>
+                <text x="18" y="110" fill="#86868b" font-size="11" transform="rotate(-90 18 110)">Challenge →</text>
+              </g>
+            </svg>
+            <figcaption>Flow (Csíkszentmihályi): challenge matched to skill — too hard → anxiety, too easy → boredom.</figcaption>
+          </figure>
+          <p>Games drive positive experiences and engagement via freedom of choice, competition, meaning and progress. Examples: <b>Roblox × Gucci</b>, <b>Fortnite</b>, <b>M&amp;M's</b>. They raise brand awareness/notoriety, teach, and dynamise digital strategy. (Jane McGonigal's TED talk: "playing is positive.")</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ===================== FLASHCARDS ===================== -->
+    <h2 class="sec-title" id="flashcards">Flashcards</h2>
+    <p class="sec-sub">Spaced retrieval. Tap a card to flip; filter by block.</p>
+    <div class="fc-controls">
+      <div class="seg" id="fcFilter">
+        <button class="on" data-f="all">All</button>
+        <button data-f="a" data-b="a">Block A</button>
+        <button data-f="b" data-b="b">Block B</button>
+      </div>
+      <span class="count" id="fcCount"></span>
+    </div>
+    <div class="flashcard" id="flashcard">
+      <div class="inner">
+        <div class="face front"><span class="badge a" id="fcBadge">A</span><div class="q" id="fcQ">—</div><span class="hint">Tap to reveal</span></div>
+        <div class="face back a" id="fcBack"><span class="badge a" id="fcBadge2">A</span><div class="a-txt" id="fcA">—</div></div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button id="fcPrev">← Previous</button>
+      <span class="pos" id="fcPos">1 / 1</span>
+      <button id="fcNext">Next →</button>
+    </div>
+
+    <!-- ===================== SELF-CHECK ===================== -->
+    <h2 class="sec-title" id="selfcheck">Self-check questions</h2>
+    <p class="sec-sub">Try to answer in your head, then expand to check.</p>
+    <div class="selfcheck" id="selfcheckBox"></div>
+
+    <!-- ===================== GLOSSARY ===================== -->
+    <h2 class="sec-title" id="glossary">Glossary</h2>
+    <p class="sec-sub">Key terms A–Z.</p>
+    <dl class="glossary" id="glossaryBox"></dl>
+
+    <!-- ===================== QUIZ ===================== -->
+    <h2 class="sec-title" id="quiz">Final quiz — 50 questions</h2>
+    <p class="sec-sub">Mixed across all nine topics, one at a time, with instant feedback. Questions shuffle on restart.</p>
+    <div class="quiz" id="quizMount"></div>
+
+  </main>
+</div>
+
+<footer>New Marketing Trends · self-study guide · diagrams are original schematics. Built for revision.</footer>
+
+<script>
+/* ============ DATA ============ */
+const FLASHCARDS=[
+  {b:"a",q:"How does Kotler define marketing?",a:"Managing profitable customer relationships — creating value for customers in order to capture value from them in return."},
+  {b:"a",q:"Name the five marketing eras.",a:"1.0 product-centric · 2.0 customer-centric · 3.0 human-centric · 4.0 digital-centric · 5.0 technology for humanity."},
+  {b:"a",q:"Need vs. desire?",a:"A need is a basic requirement; a desire is the specific, culturally-shaped way a person chooses to satisfy it."},
+  {b:"a",q:"What does STP stand for, in order?",a:"Segmentation → Targeting → Positioning."},
+  {b:"a",q:"What is a perceptual map?",a:"A tool showing how brands are perceived relative to competitors on key attributes (e.g. price vs quality)."},
+  {b:"a",q:"Marketing 5.0: the 2 disciplines vs 3 applications?",a:"Disciplines: Data-Driven & Agile. Applications: Predictive, Contextual, Augmented."},
+  {b:"a",q:"IDFA vs ATT?",a:"IDFA = Identifier For Advertisers (per-device tracking ID). ATT = App Tracking Transparency (Apple opt-in requirement)."},
+  {b:"a",q:"The four differentiation levers (Product→Brand)?",a:"Experience, values, extended product, connection with the brand."},
+  {b:"a",q:"What are Kotler's 5 A's?",a:"Aware → Appeal → Ask → Act → Advocate."},
+  {b:"a",q:"Who popularised the Hero's Journey?",a:"Joseph Campbell, in 'The Hero With a Thousand Faces' (1949)."},
+  {b:"a",q:"In storytelling, what role should the brand play?",a:"Context, not the protagonist. Characters showcase the brand's values."},
+  {b:"a",q:"Ryanair's storytelling strategy?",a:"Radical transparency — embrace the 'villain' arc, agree with haters and roast back; admitting it's cheap builds trust."},
+  {b:"b",q:"Push vs pull in mobile marketing?",a:"Push = brand-initiated (notifications, SMS). Pull = user-initiated (search, QR, opening an app)."},
+  {b:"b",q:"Which mobile format has ~98% open rates?",a:"SMS/MMS."},
+  {b:"b",q:"App vs mobile browser conversion uplift?",a:"About +130% conversion rate in-app."},
+  {b:"b",q:"What is ASO?",a:"App Store Optimization — improving an app's store visibility and ranking."},
+  {b:"b",q:"Define SEO (MOZ).",a:"Increasing the quantity and quality of traffic to a site through organic search engine results."},
+  {b:"b",q:"The three search intents?",a:"Informational, transactional, navigational."},
+  {b:"b",q:"GEO vs AEO?",a:"GEO = being cited by AI-generated answers. AEO = optimising for direct answers (snippets, FAQ, voice)."},
+  {b:"b",q:"What does E-E-A-T mean?",a:"Experience, Expertise, Authoritativeness, Trust."},
+  {b:"b",q:"Long tail's share of search traffic?",a:"~70% (fat head ~18.5%, chunky middle ~11.5%)."},
+  {b:"b",q:"SEM vs SEO?",a:"SEM = paid search visibility (ads). SEO = organic, earned visibility."},
+  {b:"b",q:"Two black-hat SEO tactics?",a:"Cloaking and keyword stuffing."},
+  {b:"b",q:"DSP vs SSP?",a:"DSP = Demand-Side Platform (advertisers bid/buy). SSP = Supply-Side Platform (publishers offer inventory)."},
+  {b:"b",q:"The RTB flow in one line?",a:"User visits → SSP offers impression → DSPs bid → highest bid wins → ad served."},
+  {b:"b",q:"Social ads account hierarchy?",a:"Campaign (objective) → Ad Set (audience/budget/placements) → Ad (creative)."},
+  {b:"b",q:"Metric for an awareness objective?",a:"CPM (cost per 1,000 impressions)."},
+  {b:"b",q:"Custom vs lookalike audience?",a:"Custom = your own lists/app users/site visitors. Lookalike = new users similar to a seed audience."},
+  {b:"b",q:"Personal brand vs personal branding?",a:"The brand is the perception of you; branding is the conscious effort to shape it."},
+  {b:"b",q:"Elevator pitch length?",a:"~30–90 seconds, ~90–270 words, 8–24 sentences."},
+  {b:"b",q:"SWOT: which quadrants are external?",a:"Opportunities and Threats (internal = Strengths/Weaknesses)."},
+  {b:"b",q:"Inbound vs outbound (HubSpot)?",a:"Inbound attracts with valuable, tailored content; outbound interrupts with unwanted content."},
+  {b:"b",q:"The inbound methodology stages?",a:"Attract → Convert → Close → Delight."},
+  {b:"b",q:"BANT stands for?",a:"Budget, Authority, Need, Time."},
+  {b:"b",q:"Explicit vs implicit lead scoring?",a:"Explicit = directly shared data (job, income, age). Implicit = monitored behaviour (opens, clicks, calls)."},
+  {b:"b",q:"Advergaming = ?",a:"Advertising + entertainment, delivered through (usually short) games."},
+  {b:"b",q:"Who developed the 'flow state'?",a:"Mihály Csíkszentmihályi — the channel where challenge matches skill (between anxiety and boredom)."}
+];
+
+const SELFCHECK=[
+  {q:"Why did marketing shift from a transactional to a relationship view?",a:"Because lasting profitability comes from retaining and growing customers, not one-off exchanges — creating value for customers to capture value in return (Kotler). Relationships lower acquisition costs and build advocacy."},
+  {q:"Explain the difference between Marketing 4.0 and 5.0.",a:"4.0 is digital-centric (blending online and offline interaction). 5.0 is 'technology for humanity' — using tech that mimics human marketers (data, AI, AR) to create and enhance value across the journey."},
+  {q:"Why did Apple's ATT matter for marketers?",a:"It required users to opt in before being tracked across apps, cutting the data that fuelled targeting (especially IDFA-based). It shifted power toward privacy and made tracking trust-reliant."},
+  {q:"What makes a brand 'relevant' rather than just known?",a:"Relevance means connecting with the audience's desires, needs and aspirations — making their lives easier and surprising them continuously — not merely being recognised."},
+  {q:"In storytelling, why use vulnerable characters and keep the brand out of the lead role?",a:"Audiences form stronger emotional bonds with authentic, struggling characters. If the brand is mere context while characters carry its values, the story feels genuine rather than like an ad."},
+  {q:"Why does the app channel convert so much better than the mobile browser?",a:"Apps offer a controlled, personalised environment with loyalty/gamification and first-party data, away from external influence at the purchase decision — yielding roughly +130% conversion."},
+  {q:"Contrast the three search intents and their typical SERP features.",a:"Informational (e.g. 'what is X') → AI overviews, snippets, knowledge graph, PAA. Transactional ('buy X') → shopping ads, merchant listings. Navigational ('brand near me') → local map pack, reviews."},
+  {q:"What is GEO and how does it differ from classic SEO?",a:"GEO (Generative Engine Optimization) aims to be cited as a trusted source inside AI-generated answers, whereas SEO aims to rank links on a SERP. GEO leans on structured data, clear answers and E-E-A-T."},
+  {q:"Walk through the real-time bidding flow.",a:"A user visits a site, triggering the process. The SSP offers the impression; DSPs (on behalf of advertisers) bid in real time; the highest bid wins and the ad is served — all in milliseconds."},
+  {q:"How are social-ad objectives matched to metrics?",a:"Awareness → reach/impressions measured by CPM; consideration → traffic/engagement/views by CPC/CPV; conversion → leads/sales/installs by CPA."},
+  {q:"Why is networking emphasised in personal branding?",a:"Because it remains the No. 1 cause of job attainment (Lancaster, 2015) — relationships open opportunities that visibility and credentials alone do not."},
+  {q:"Explain explicit vs implicit lead scoring with an example.",a:"Explicit uses directly shared data (job title A/B/C). Implicit tracks behaviour (email opens, clicks 1/2/3). Combined, an 'A1' lead is high on both and treated as hot."},
+  {q:"What is the 'boring product paradox' and how did Liquid Death solve it?",a:"Commodity products (like water) market identically and dully. Liquid Death made a healthy product fun — selling 'murder your thirst' as entertainment rather than 'hydration'."},
+  {q:"Describe the flow state and why it matters for game marketing.",a:"Flow (Csíkszentmihályi) is the optimal channel where challenge matches skill — too much challenge causes anxiety, too little causes boredom. Games engineered for flow keep players engaged with the brand."},
+  {q:"Why must traditional and digital marketing work together?",a:"Modern journeys are digital-dominated (≈19 of 24 touchpoints in the automotive case) but still include offline moments; integrating both covers the whole 5A path from awareness to advocacy."}
+];
+
+const GLOSSARY=[
+  ["AEO","Answer Engine Optimization — optimising content for direct answers (snippets, FAQ schema, voice) rather than clicks."],
+  ["Advergaming","Combining advertising with entertainment through (usually short) games to build engagement."],
+  ["Agile Marketing","Marketing 5.0 discipline using decentralised teams, fast deployment and high adaptability."],
+  ["ASO","App Store Optimization — improving an app's visibility and ranking in app stores."],
+  ["ATT","App Tracking Transparency — Apple's framework requiring user opt-in before cross-app tracking."],
+  ["Augmented Marketing","Marketing 5.0 application: tiered interfaces plus digital tools that boost frontline marketers."],
+  ["BANT","Lead qualification: Budget, Authority, Need, Time."],
+  ["Black-hat SEO","Manipulative tactics such as cloaking and keyword stuffing."],
+  ["CPA / CPC / CPM","Cost per acquisition / per click / per 1,000 impressions — metrics by funnel stage."],
+  ["CTV","Connected TV — internet-connected televisions/streaming, a fast-growing ad channel."],
+  ["Contextual Marketing","Marketing 5.0 application: personalised info, customised interaction and total immersion via real-time context."],
+  ["Custom Audience","Targeting built from your own data: contact lists, app users, site visitors."],
+  ["Data-Driven Marketing","Marketing 5.0 discipline using big data to optimise decisions."],
+  ["DSP","Demand-Side Platform — lets advertisers bid for and buy ad inventory programmatically."],
+  ["E-E-A-T","Experience, Expertise, Authoritativeness, Trust — signals that help content be chosen by Google/AI."],
+  ["Elevator pitch","Short self-introduction: ~30–90s, ~90–270 words, 8–24 sentences."],
+  ["Geofencing","Location-based mobile targeting within a defined geographic boundary."],
+  ["GEO","Generative Engine Optimization — being cited as a trusted source in AI-generated answers."],
+  ["Hero's Journey","Campbell's recurring narrative structure: known → unknown → abyss → transformation → return."],
+  ["Inbound marketing","Attracting customers with valuable, tailored content rather than interrupting them."],
+  ["IDFA","Identifier For Advertisers — a per-device ID enabling cross-device tracking."],
+  ["Lead magnet","Gated content (e-book, demo, discount) exchanged for a prospect's information."],
+  ["Long tail","The many low-volume keywords that together carry ~70% of search traffic."],
+  ["Lookalike Audience","New users found because they resemble an existing (seed) audience."],
+  ["MEDDIC","Lead qualification: Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion."],
+  ["MQL / SQL / SAL","Marketing / Sales Qualified Lead; Sales Accepted Lead — stages of qualification."],
+  ["Perceptual map","A chart of how brands are perceived versus competitors on key attributes."],
+  ["Personal brand","The widely-recognised perception of an individual based on their experience and achievements."],
+  ["Programmatic advertising","Automated buying/selling of ad inventory via DSPs, SSPs and ad exchanges."],
+  ["Pull / Push","Pull = user-initiated interaction; push = brand-initiated message."],
+  ["RTB","Real-Time Bidding — per-impression ad auctions completed in milliseconds."],
+  ["Retargeting","Re-engaging users who interacted before, across display, social and email."],
+  ["SEM","Search Engine Marketing — paid search visibility (ads)."],
+  ["SEO","Search Engine Optimization — earning organic search traffic."],
+  ["SSP","Supply-Side Platform — lets publishers offer and manage ad inventory."],
+  ["STP","Segmentation, Targeting, Positioning — the core marketing strategy sequence."],
+  ["SWOT","Strengths, Weaknesses (internal) and Opportunities, Threats (external)."]
+];
+
+const QUESTIONS=[
+  {t:"Intro",q:"According to Kotler & Armstrong (2014), marketing is fundamentally about:",o:["Maximising production efficiency","Managing profitable customer relationships","Lowering prices below competitors","Advertising on as many channels as possible"],a:1,e:"Kotler defines marketing as managing profitable customer relationships — creating value for customers to capture value in return."},
+  {t:"Intro",q:"Which marketing era is described as 'product-centric'?",o:["Marketing 1.0","Marketing 2.0","Marketing 3.0","Marketing 4.0"],a:0,e:"1.0 product-centric; 2.0 customer; 3.0 human; 4.0 digital; 5.0 technology for humanity."},
+  {t:"Intro",q:"The difference between a NEED and a DESIRE is that a desire is:",o:["A basic biological requirement","The specific, culturally-shaped way of satisfying a need","Always irrational","The same as a need"],a:1,e:"A need is a basic requirement; a desire is the specific way a person chooses to satisfy it, shaped by culture."},
+  {t:"Intro",q:"In the STP framework, what is the correct order?",o:["Targeting → Segmentation → Positioning","Positioning → Targeting → Segmentation","Segmentation → Targeting → Positioning","Segmentation → Positioning → Targeting"],a:2,e:"STP = Segmentation → Targeting → Positioning."},
+  {t:"Intro",q:"A perceptual map is a tool that:",o:["Tracks website traffic sources","Displays how brands are perceived relative to competitors on key attributes","Maps physical store locations","Shows the customer's purchase history"],a:1,e:"It plots how a brand is perceived versus competitors on chosen attributes (e.g. price vs quality)."},
+  {t:"Intro",q:"A 'customer persona' is:",o:["A real, named customer","A semi-fictional profile representing a key segment","A competitor's brand","A pricing tier"],a:1,e:"A persona is a semi-fictional profile representing a target segment's traits and needs."},
+  {t:"M5.0",q:"Which TWO components of Marketing 5.0 are 'disciplines'?",o:["Predictive & Contextual","Data-Driven & Agile","Augmented & Predictive","Contextual & Augmented"],a:1,e:"Data-Driven and Agile are the disciplines; predictive, contextual and augmented are applications."},
+  {t:"M5.0",q:"'Personalised information, customised interaction, total immersion' describes which application?",o:["Predictive Marketing","Augmented Marketing","Contextual Marketing","Agile Marketing"],a:2,e:"Contextual Marketing delivers personalised info, customised interaction and total immersion via real-time context."},
+  {t:"M5.0",q:"What does IDFA stand for?",o:["Internet Data For Apps","Identifier For Advertisers","Integrated Digital Form Authentication","Internal Data Flow Agreement"],a:1,e:"IDFA = Identifier For Advertisers, enabling cross-device tracking."},
+  {t:"M5.0",q:"'CTV' in the 'CTV avalanche' refers to:",o:["Click-Through Volume","Connected TV","Customer Touchpoint Value","Conversion Tracking Vector"],a:1,e:"CTV = Connected TV — internet-connected televisions/streaming, a growing ad channel."},
+  {t:"Brand",q:"The four levers of 21st-century differentiation are experience, values, connection with the brand and:",o:["Lowest price","Extended product","Mass advertising","Celebrity endorsement"],a:1,e:"Differentiation: experience, values, extended product, connection with the brand."},
+  {t:"Brand",q:"A brand becomes 'relevant' when it:",o:["Has the biggest ad budget","Connects with the desires, needs and aspirations of its audience","Opens the most stores","Has the lowest prices"],a:1,e:"Relevance = connecting with the audience's desires, needs and aspirations."},
+  {t:"Brand",q:"In Kotler's 5 A's, which is the final stage?",o:["Act","Ask","Advocate","Appeal"],a:2,e:"Aware → Appeal → Ask → Act → Advocate; advocacy is the goal."},
+  {t:"Brand",q:"In the automotive example, of ~24 touchpoints how many were digital?",o:["About 5","About 12","About 19","All 24"],a:2,e:"About 19 of ~24 touchpoints were digital — showing digital dominance."},
+  {t:"Story",q:"The Hero's Journey was popularised by:",o:["Philip Kotler","Joseph Campbell","David Chaffey","Mihály Csíkszentmihályi"],a:1,e:"Joseph Campbell, in 'The Hero With a Thousand Faces' (1949)."},
+  {t:"Story",q:"In effective brand storytelling, the brand should be:",o:["The main hero","Part of the story's context, not the protagonist","Never mentioned","The villain"],a:1,e:"The brand is context; characters (not the brand) are protagonists and showcase its values."},
+  {t:"Story",q:"Why are vulnerable characters effective?",o:["They are cheaper to produce","Audiences form a stronger emotional connection with authentic, struggling characters","They guarantee virality","They avoid controversy"],a:1,e:"The more vulnerable a character seems, the closer the audience feels."},
+  {t:"Story",q:"Liquid Death's storytelling strategy is best described as:",o:["Corporate and formal","Turning a boring commodity into entertainment","Informational about water purity","Luxury positioning"],a:1,e:"It solves the 'boring product' paradox by making water marketing fun ('murder your thirst')."},
+  {t:"Story",q:"Ryanair's social approach is an example of:",o:["Radical transparency / the 'villain' arc","Premium luxury branding","Avoiding all interaction","Corporate apologies"],a:0,e:"Radical transparency — agreeing with haters and roasting back; admitting it's cheap builds trust."},
+  {t:"Mobile",q:"Per the MMA, mobile marketing engages audiences:",o:["Only via SMS","In an interactive and relevant manner through any mobile device or network","Exclusively through apps","Through television only"],a:1,e:"MMA: engaging audiences interactively and relevantly through/with any mobile device or network."},
+  {t:"Mobile",q:"A PUSH mobile tactic is one where:",o:["The user searches for the brand","The brand initiates and sends the message","The user scans a QR code","The user opens the app themselves"],a:1,e:"Push = brand-initiated; pull = user-initiated."},
+  {t:"Mobile",q:"Which format is noted for ~98% open rates?",o:["Display banners","SMS/MMS","Push email","Web pop-ups"],a:1,e:"SMS/MMS is cited with ~98% open rates."},
+  {t:"Mobile",q:"App vs mobile browser conversion-rate uplift is about:",o:["+23%","+85%","+130%","+286%"],a:2,e:"App conversion was about +130% vs mobile browser."},
+  {t:"Mobile",q:"ASO stands for:",o:["Ad Spend Optimisation","App Store Optimization","Audience Segmentation Online","Automated Sales Outreach"],a:1,e:"ASO = App Store Optimization."},
+  {t:"SEO",q:"MOZ defines SEO as increasing traffic through:",o:["Paid search ads","Organic search engine results","Social media posts","Email campaigns"],a:1,e:"SEO increases quantity and quality of traffic via organic results."},
+  {t:"SEO",q:"'Nike running shoes on sale' is which search intent?",o:["Informational","Navigational","Transactional","Commercial-only"],a:2,e:"Intent to buy → transactional, surfacing Shopping Ads."},
+  {t:"SEO",q:"'Zara store Barcelona' best represents which intent?",o:["Informational","Transactional","Navigational","Generative"],a:2,e:"Looking for a place/brand location is navigational (Local Map Pack)."},
+  {t:"SEO",q:"GEO (Generative Engine Optimization) aims to:",o:["Rank #1 on SERPs","Be cited by AI-generated answers","Increase PPC bids","Build more backlinks only"],a:1,e:"GEO = being chosen/cited as a trusted source within AI responses."},
+  {t:"SEO",q:"On the demand curve, the 'long tail' is roughly what share of traffic?",o:["~18.5%","~11.5%","~70%","~5%"],a:2,e:"Long-tail ≈ 70%; fat head ~18.5%; chunky middle ~11.5%."},
+  {t:"SEO",q:"Which is a BLACK-HAT SEO tactic?",o:["Canonical URLs","Keyword stuffing","Responsive design","Alt text"],a:1,e:"Cloaking and keyword stuffing are black-hat."},
+  {t:"Ads",q:"A full-page pop-up is notable because it:",o:["Is heavily penalised by search engines","Is closable by a button and NOT penalised by search engines","Cannot be closed","Only appears on mobile"],a:1,e:"Full-page pop-ups take the whole screen, are closable, annoy users, but are not penalised."},
+  {t:"Ads",q:"A 'bumper' video ad is:",o:["A 30-minute ad","A very short (≤6s) non-skippable ad","An expanding banner","An audio-only ad"],a:1,e:"Bumper ads are ≤6s and non-skippable."},
+  {t:"Ads",q:"In programmatic advertising, a DSP is a:",o:["Demand-Side Platform used by advertisers to bid","Data Storage Provider","Direct Sales Partner","Display Standard Protocol"],a:0,e:"DSP = Demand-Side Platform (advertisers bid); SSP = Supply-Side Platform (publishers)."},
+  {t:"Ads",q:"In the RTB flow, who 'triggers the process'?",o:["The advertiser","The user visiting a website","The ad exchange","The data provider"],a:1,e:"A user visiting a site triggers the auction; the SSP offers the impression."},
+  {t:"Ads",q:"In a social-ads account, the correct hierarchy is:",o:["Ad → Ad Set → Campaign","Campaign → Ad Set → Ad","Ad Set → Campaign → Ad","Campaign → Ad → Ad Set"],a:1,e:"Campaign (objective) → Ad Set (audience/budget) → Ad (creative)."},
+  {t:"Ads",q:"For an AWARENESS objective, the common metric is:",o:["CPA","CPM","CPC","CPL"],a:1,e:"Awareness → reach/impressions, measured by CPM."},
+  {t:"PB",q:"'Personal branding' (vs a personal brand) is best defined as:",o:["The perception others already hold of you","The conscious, intentional effort to create and influence public perception","Your CV","Your follower count"],a:1,e:"The brand is the perception; branding is the conscious effort to shape it."},
+  {t:"PB",q:"Defining your mission, vision and values falls under which area?",o:["Image","Direction","Logistics","Selling"],a:1,e:"'Direction' covers mission, vision, values — role, goal, principles."},
+  {t:"PB",q:"Networking remains the No. 1 cause of:",o:["Brand awareness","Job attainment","Social media growth","Product sales"],a:1,e:"Citing Lancaster (2015), networking is the No.1 cause of job attainment."},
+  {t:"PB",q:"Recommended elevator-pitch length is approximately:",o:["5–10 seconds","30–90 seconds","3–5 minutes","10+ minutes"],a:1,e:"~30–90 seconds, ~90–270 words, 8–24 sentences."},
+  {t:"PB",q:"In a SWOT, Opportunities and Threats are:",o:["Internal factors","External factors","Always negative","Financial metrics"],a:1,e:"Strengths/Weaknesses internal; Opportunities/Threats external."},
+  {t:"PB",q:"Which is one of the '7 capital sins of personal branding'?",o:["Consistency","Inconsistency","Humility","Planning"],a:1,e:"The 7 sins include falsehood, demotivation, inconsistency, selfishness, vanity, staggering, reckless ambition."},
+  {t:"Inbound",q:"Per HubSpot, inbound marketing:",o:["Interrupts audiences with unwanted content","Attracts customers with valuable, tailored content","Relies on cold calls","Is the same as outbound"],a:1,e:"Inbound attracts via valuable, tailored content; outbound interrupts."},
+  {t:"Inbound",q:"The inbound methodology stages are:",o:["Attract → Convert → Close → Delight","Reach → Bid → Win → Serve","Aware → Appeal → Ask → Act","Crawl → Index → Rank → Cite"],a:0,e:"Attract → Convert → Close → Delight."},
+  {t:"Inbound",q:"A 'lead magnet' is:",o:["A paid ad placement","Gated content exchanged for a prospect's information","A CRM tool","A social algorithm"],a:1,e:"Gated content (e-books, demos, discounts) given for prospect information."},
+  {t:"Inbound",q:"In BANT, the letters stand for:",o:["Brand, Audience, Need, Time","Budget, Authority, Need, Time","Budget, Awareness, Network, Trust","Brand, Authority, Niche, Target"],a:1,e:"BANT = Budget, Authority, Need, Time."},
+  {t:"Inbound",q:"'Implicit scoring' of a lead is based on:",o:["Directly shared data like job title","Monitored behaviour like opened emails and clicks","The salesperson's intuition","Company revenue only"],a:1,e:"Implicit = behaviour (opens, clicks, calls); explicit = shared data (job, income, age)."},
+  {t:"Inbound",q:"Advergaming combines advertising with:",o:["Email marketing","Entertainment","Public relations","Accounting"],a:1,e:"Advergaming = advertising + entertainment via games."},
+  {t:"Inbound",q:"The 'flow state' (challenge matching skill) is associated with:",o:["Joseph Campbell","Mihály Csíkszentmihályi","Philip Kotler","Jane McGonigal"],a:1,e:"Flow was developed by Mihály Csíkszentmihályi — between anxiety and boredom."},
+  {t:"Inbound",q:"The correct lead-temperature progression is:",o:["Hot → Warm → Cold","Cold → Warm → Hot","Warm → Cold → Hot","Cold → Hot → Warm"],a:1,e:"Leads progress Cold → Warm → Hot as interest rises."}
+];
+
+/* ============ THEME ============ */
+const root=document.documentElement;
+const saved=localStorage.getItem('nmt-theme');
+if(saved)root.setAttribute('data-theme',saved);
+document.getElementById('themeBtn').onclick=()=>{
+  const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+  root.setAttribute('data-theme',next);localStorage.setItem('nmt-theme',next);
+};
+
+/* ============ PROGRESS BAR ============ */
+const prog=document.getElementById('progress');
+addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(h>0?(scrollY/h*100):0)+'%';
+},{passive:true});
+
+/* ============ MOBILE NAV ============ */
+const sidebar=document.getElementById('sidebar'),scrim=document.getElementById('scrim');
+document.getElementById('menuBtn').onclick=()=>{sidebar.classList.toggle('open');scrim.classList.toggle('show');};
+scrim.onclick=()=>{sidebar.classList.remove('open');scrim.classList.remove('show');};
+sidebar.querySelectorAll('a').forEach(a=>a.onclick=()=>{sidebar.classList.remove('open');scrim.classList.remove('show');});
+
+/* ============ SCROLLSPY ============ */
+const navLinks=[...sidebar.querySelectorAll('a')];
+const spyTargets=navLinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const spy=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const id='#'+e.target.id;
+      navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id));
+    }
+  });
+},{rootMargin:'-45% 0px -50% 0px'});
+spyTargets.forEach(t=>spy.observe(t));
+
+/* ============ SEARCH FILTER ============ */
+const searchBox=document.getElementById('search');
+searchBox.addEventListener('input',()=>{
+  const q=searchBox.value.trim().toLowerCase();
+  document.querySelectorAll('main .topic').forEach(sec=>{
+    const hit=!q||sec.textContent.toLowerCase().includes(q);
+    sec.style.display=hit?'':'none';
+  });
+});
+
+/* ============ FLASHCARDS ============ */
+let fcList=FLASHCARDS.slice(),fcI=0;
+const fc=document.getElementById('flashcard');
+const fcQ=document.getElementById('fcQ'),fcA=document.getElementById('fcA');
+const fcBadge=document.getElementById('fcBadge'),fcBadge2=document.getElementById('fcBadge2');
+const fcBack=document.getElementById('fcBack'),fcPos=document.getElementById('fcPos'),fcCount=document.getElementById('fcCount');
+function fcRender(){
+  const c=fcList[fcI];if(!c)return;
+  fc.classList.remove('flip');
+  setTimeout(()=>{
+    fcQ.textContent=c.q;fcA.textContent=c.a;
+    const L=c.b.toUpperCase();
+    fcBadge.textContent=L;fcBadge2.textContent=L;
+    fcBadge.className='badge '+c.b;fcBadge2.className='badge '+c.b;
+    fcBack.className='face back '+c.b;
+  },fc.classList.contains('flip')?180:0);
+  fcPos.textContent=(fcI+1)+' / '+fcList.length;
+}
+fc.onclick=()=>fc.classList.toggle('flip');
+document.getElementById('fcNext').onclick=()=>{fcI=(fcI+1)%fcList.length;fcRender();};
+document.getElementById('fcPrev').onclick=()=>{fcI=(fcI-1+fcList.length)%fcList.length;fcRender();};
+document.getElementById('fcFilter').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  [...e.currentTarget.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  const f=b.dataset.f;
+  fcList=f==='all'?FLASHCARDS.slice():FLASHCARDS.filter(c=>c.b===f);
+  fcI=0;fcRender();
+});
+fcCount.textContent=FLASHCARDS.length+' cards';
+fcRender();
+
+/* ============ SELF-CHECK ============ */
+const scBox=document.getElementById('selfcheckBox');
+SELFCHECK.forEach((it,i)=>{
+  const d=document.createElement('details');
+  d.innerHTML='<summary><span class="qn">Q'+(i+1)+'</span><span>'+it.q+'</span><span class="plus"></span></summary><div class="ans">'+it.a+'</div>';
+  scBox.appendChild(d);
+});
+
+/* ============ GLOSSARY ============ */
+const glBox=document.getElementById('glossaryBox');
+GLOSSARY.slice().sort((a,b)=>a[0].localeCompare(b[0])).forEach(([t,d])=>{
+  const div=document.createElement('div');div.className='term';
+  div.innerHTML='<dt>'+t+'</dt><dd>'+d+'</dd>';
+  glBox.appendChild(div);
+});
+
+/* ============ QUIZ ENGINE (one at a time + ring) ============ */
+const mount=document.getElementById('quizMount');
+let order=[],qPos=0,score=0,locked=false;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startQuiz(){
+  order=shuffle([...Array(QUESTIONS.length).keys()]);
+  qPos=0;score=0;locked=false;renderQ();
+}
+function renderQ(){
+  locked=false;
+  const item=QUESTIONS[order[qPos]];
+  const pct=Math.round(qPos/QUESTIONS.length*100);
+  const letters=['A','B','C','D'];
+  mount.innerHTML=
+    '<div class="quiz-card">'+
+      '<div class="quiz-top"><span class="qmeta">Question '+(qPos+1)+' of '+QUESTIONS.length+'</span><span class="qtag">'+item.t+'</span></div>'+
+      '<div class="quiz-prog"><i style="width:'+pct+'%"></i></div>'+
+      '<div class="quiz-q"><span class="n">Q'+(qPos+1)+'.</span>'+item.q+'</div>'+
+      '<div class="opts" id="opts"></div>'+
+      '<div class="quiz-fb" id="fb"></div>'+
+      '<div class="quiz-actions"><span class="qmeta">Score: '+score+'</span><button class="btn primary" id="nextBtn" disabled>'+(qPos===QUESTIONS.length-1?'See results':'Next question')+'</button></div>'+
+    '</div>';
+  const opts=document.getElementById('opts');
+  item.o.forEach((txt,j)=>{
+    const b=document.createElement('button');b.className='opt';
+    b.innerHTML='<span class="key">'+letters[j]+'</span><span>'+txt+'</span>';
+    b.onclick=()=>choose(j,item,opts);
+    opts.appendChild(b);
+  });
+  document.getElementById('nextBtn').onclick=()=>{
+    if(qPos===QUESTIONS.length-1){showResults();}
+    else{qPos++;renderQ();window.scrollTo({top:document.getElementById('quiz').offsetTop-60,behavior:'smooth'});}
+  };
+}
+function choose(j,item,opts){
+  if(locked)return;locked=true;
+  const btns=[...opts.children];
+  btns.forEach((b,k)=>{
+    b.disabled=true;
+    if(k===item.a)b.classList.add('correct');
+    else if(k===j)b.classList.add('wrong');
+    else b.classList.add('dim');
+  });
+  const fb=document.getElementById('fb');
+  if(j===item.a){score++;fb.className='quiz-fb ok show';fb.innerHTML='<b>Correct.</b> '+item.e;}
+  else{fb.className='quiz-fb no show';fb.innerHTML='<b>Not quite.</b> '+item.e;}
+  document.querySelector('.quiz-actions .qmeta').textContent='Score: '+score;
+  document.getElementById('nextBtn').disabled=false;
+}
+function showResults(){
+  const pct=Math.round(score/QUESTIONS.length*100);
+  const R=80,C=2*Math.PI*R,off=C*(1-pct/100);
+  let title,msg;
+  if(pct>=90){title='Outstanding';msg='You know this material cold. A final skim of any missed questions and you are fully exam-ready.';}
+  else if(pct>=75){title='Strong work';msg='A solid grasp. Review the few you missed and you will be in great shape.';}
+  else if(pct>=60){title='Good base';msg='You have the foundations. Revisit the topics where you slipped and run the quiz again.';}
+  else{title='Keep going';msg='Re-read the topic summaries and full-detail panels, then try the quiz again — repetition is how it sticks.';}
+  mount.innerHTML=
+    '<div class="results show">'+
+      '<div class="ring-wrap"><svg width="180" height="180" viewBox="0 0 180 180">'+
+        '<circle cx="90" cy="90" r="80" fill="none" stroke="var(--surface-3)" stroke-width="12"/>'+
+        '<circle cx="90" cy="90" r="80" fill="none" stroke="url(#rg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" id="ring"/>'+
+        '<defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--a-tint)"/><stop offset="1" stop-color="var(--b-tint)"/></linearGradient></defs>'+
+      '</svg><div class="pct"><span class="big">'+pct+'%</span><span class="sub">'+score+' / '+QUESTIONS.length+'</span></div></div>'+
+      '<h3>'+title+'</h3><p class="msg">'+msg+'</p>'+
+      '<div class="quiz-actions" style="justify-content:center"><button class="btn primary" id="againBtn">Restart &amp; shuffle</button></div>'+
+    '</div>';
+  requestAnimationFrame(()=>{setTimeout(()=>{document.getElementById('ring').style.transition='stroke-dashoffset 1s var(--ease)';document.getElementById('ring').style.strokeDashoffset=off;},60);});
+  document.getElementById('againBtn').onclick=()=>{startQuiz();window.scrollTo({top:document.getElementById('quiz').offsetTop-60,behavior:'smooth'});};
+}
+startQuiz();
+</script>
+</body>
+</html>
