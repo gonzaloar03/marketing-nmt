@@ -268,6 +268,13 @@ figcaption{color:var(--text-3);font-size:12.5px;margin-top:8px}
 
 /* ===== Quiz engine ===== */
 .quiz{margin:22px 0 0}
+.test-switch{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.test-switch .ts-label{font-size:13px;color:var(--text-3);font-weight:500}
+.test-switch .ts-seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--hairline-soft);border-radius:980px;padding:4px}
+.test-switch .ts-seg button{border:none;background:none;font-family:var(--font);font-size:13.5px;font-weight:600;color:var(--text-2);
+  padding:8px 18px;border-radius:980px;cursor:pointer;transition:.15s var(--ease)}
+.test-switch .ts-seg button:hover{color:var(--text)}
+.test-switch .ts-seg button.on{background:var(--surface);color:var(--accent);box-shadow:var(--shadow-1)}
 .quiz-card{background:var(--surface);border:1px solid var(--hairline-soft);border-radius:var(--r-lg);
   padding:30px 30px 26px;box-shadow:var(--shadow-2);min-height:300px;display:flex;flex-direction:column}
 .quiz-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
@@ -365,7 +372,7 @@ footer{border-top:1px solid var(--hairline-soft);margin-top:80px;padding:36px 0;
     <a href="#flashcards"><span class="dot a"></span>Flashcards</a>
     <a href="#selfcheck"><span class="dot a"></span>Self-check</a>
     <a href="#glossary"><span class="dot b"></span>Glossary</a>
-    <a href="#quiz"><span class="dot b"></span>Final quiz (50)</a>
+    <a href="#quiz"><span class="dot b"></span>Final quiz (3×50)</a>
   </aside>
 
   <main>
@@ -376,7 +383,7 @@ footer{border-top:1px solid var(--hairline-soft);margin-top:80px;padding:36px 0;
       <div class="meta">
         <span class="chip"><span class="d a"></span>4 foundation topics</span>
         <span class="chip"><span class="d b"></span>5 digital topics</span>
-        <span class="chip">50-question quiz</span>
+        <span class="chip">3 × 50-question quizzes</span>
       </div>
     </section>
 
@@ -1070,8 +1077,8 @@ footer{border-top:1px solid var(--hairline-soft);margin-top:80px;padding:36px 0;
     <dl class="glossary" id="glossaryBox"></dl>
 
     <!-- ===================== QUIZ ===================== -->
-    <h2 class="sec-title" id="quiz">Final quiz — 50 questions</h2>
-    <p class="sec-sub">Mixed across all nine topics, one at a time, with instant feedback. Questions shuffle on restart.</p>
+    <h2 class="sec-title" id="quiz">Final quiz — 3 tests × 50 questions</h2>
+    <p class="sec-sub">Three independent tests covering all nine topics, 50 questions each. Pick a test below. Questions <b>and answer options</b> shuffle on every attempt.</p>
     <div class="quiz" id="quizMount"></div>
 
   </main>
@@ -1179,58 +1186,164 @@ const GLOSSARY=[
   ["SWOT","Strengths, Weaknesses (internal) and Opportunities, Threats (external)."]
 ];
 
-const QUESTIONS=[
-  {t:"Intro",q:"According to Kotler & Armstrong (2014), marketing is fundamentally about:",o:["Maximising production efficiency","Managing profitable customer relationships","Lowering prices below competitors","Advertising on as many channels as possible"],a:1,e:"Kotler defines marketing as managing profitable customer relationships — creating value for customers to capture value in return."},
-  {t:"Intro",q:"Which marketing era is described as 'product-centric'?",o:["Marketing 1.0","Marketing 2.0","Marketing 3.0","Marketing 4.0"],a:0,e:"1.0 product-centric; 2.0 customer; 3.0 human; 4.0 digital; 5.0 technology for humanity."},
-  {t:"Intro",q:"The difference between a NEED and a DESIRE is that a desire is:",o:["A basic biological requirement","The specific, culturally-shaped way of satisfying a need","Always irrational","The same as a need"],a:1,e:"A need is a basic requirement; a desire is the specific way a person chooses to satisfy it, shaped by culture."},
-  {t:"Intro",q:"In the STP framework, what is the correct order?",o:["Targeting → Segmentation → Positioning","Positioning → Targeting → Segmentation","Segmentation → Targeting → Positioning","Segmentation → Positioning → Targeting"],a:2,e:"STP = Segmentation → Targeting → Positioning."},
-  {t:"Intro",q:"A perceptual map is a tool that:",o:["Tracks website traffic sources","Displays how brands are perceived relative to competitors on key attributes","Maps physical store locations","Shows the customer's purchase history"],a:1,e:"It plots how a brand is perceived versus competitors on chosen attributes (e.g. price vs quality)."},
+const TESTS={
+  "Test 1":[
+  {t:"Intro",q:"According to Kotler & Armstrong (2014), marketing is fundamentally about:",o:["Managing profitable customer relationships","Maximising production efficiency","Lowering prices below competitors","Advertising on as many channels as possible"],a:0,e:"Kotler defines marketing as managing profitable customer relationships — creating value for customers to capture value in return."},
+  {t:"Intro",q:"Which marketing era is described as 'product-centric'?",o:["Marketing 2.0","Marketing 1.0","Marketing 3.0","Marketing 4.0"],a:1,e:"1.0 product-centric; 2.0 customer; 3.0 human; 4.0 digital; 5.0 technology for humanity."},
+  {t:"Intro",q:"The difference between a NEED and a DESIRE is that a desire is:",o:["A basic biological requirement","Always irrational","The specific, culturally-shaped way of satisfying a need","The same as a need"],a:2,e:"A need is a basic requirement; a desire is the specific way a person chooses to satisfy it, shaped by culture."},
+  {t:"Intro",q:"In the STP framework, what is the correct order?",o:["Targeting → Segmentation → Positioning","Positioning → Targeting → Segmentation","Segmentation → Positioning → Targeting","Segmentation → Targeting → Positioning"],a:3,e:"STP = Segmentation → Targeting → Positioning."},
+  {t:"Intro",q:"A perceptual map is a tool that:",o:["Displays how brands are perceived relative to competitors on key attributes","Tracks website traffic sources","Maps physical store locations","Shows the customer's purchase history"],a:0,e:"It plots how a brand is perceived versus competitors on chosen attributes (e.g. price vs quality)."},
   {t:"Intro",q:"A 'customer persona' is:",o:["A real, named customer","A semi-fictional profile representing a key segment","A competitor's brand","A pricing tier"],a:1,e:"A persona is a semi-fictional profile representing a target segment's traits and needs."},
-  {t:"M5.0",q:"Which TWO components of Marketing 5.0 are 'disciplines'?",o:["Predictive & Contextual","Data-Driven & Agile","Augmented & Predictive","Contextual & Augmented"],a:1,e:"Data-Driven and Agile are the disciplines; predictive, contextual and augmented are applications."},
-  {t:"M5.0",q:"'Personalised information, customised interaction, total immersion' describes which application?",o:["Predictive Marketing","Augmented Marketing","Contextual Marketing","Agile Marketing"],a:2,e:"Contextual Marketing delivers personalised info, customised interaction and total immersion via real-time context."},
-  {t:"M5.0",q:"What does IDFA stand for?",o:["Internet Data For Apps","Identifier For Advertisers","Integrated Digital Form Authentication","Internal Data Flow Agreement"],a:1,e:"IDFA = Identifier For Advertisers, enabling cross-device tracking."},
+  {t:"M5.0",q:"Which TWO components of Marketing 5.0 are 'disciplines'?",o:["Predictive & Contextual","Augmented & Predictive","Data-Driven & Agile","Contextual & Augmented"],a:2,e:"Data-Driven and Agile are the disciplines; predictive, contextual and augmented are applications."},
+  {t:"M5.0",q:"'Personalised information, customised interaction, total immersion' describes which application?",o:["Predictive Marketing","Augmented Marketing","Agile Marketing","Contextual Marketing"],a:3,e:"Contextual Marketing delivers personalised info, customised interaction and total immersion via real-time context."},
+  {t:"M5.0",q:"What does IDFA stand for?",o:["Identifier For Advertisers","Internet Data For Apps","Integrated Digital Form Authentication","Internal Data Flow Agreement"],a:0,e:"IDFA = Identifier For Advertisers, enabling cross-device tracking."},
   {t:"M5.0",q:"'CTV' in the 'CTV avalanche' refers to:",o:["Click-Through Volume","Connected TV","Customer Touchpoint Value","Conversion Tracking Vector"],a:1,e:"CTV = Connected TV — internet-connected televisions/streaming, a growing ad channel."},
-  {t:"Brand",q:"The four levers of 21st-century differentiation are experience, values, connection with the brand and:",o:["Lowest price","Extended product","Mass advertising","Celebrity endorsement"],a:1,e:"Differentiation: experience, values, extended product, connection with the brand."},
-  {t:"Brand",q:"A brand becomes 'relevant' when it:",o:["Has the biggest ad budget","Connects with the desires, needs and aspirations of its audience","Opens the most stores","Has the lowest prices"],a:1,e:"Relevance = connecting with the audience's desires, needs and aspirations."},
-  {t:"Brand",q:"In Kotler's 5 A's, which is the final stage?",o:["Act","Ask","Advocate","Appeal"],a:2,e:"Aware → Appeal → Ask → Act → Advocate; advocacy is the goal."},
-  {t:"Brand",q:"In the automotive example, of ~24 touchpoints how many were digital?",o:["About 5","About 12","About 19","All 24"],a:2,e:"About 19 of ~24 touchpoints were digital — showing digital dominance."},
-  {t:"Story",q:"The Hero's Journey was popularised by:",o:["Philip Kotler","Joseph Campbell","David Chaffey","Mihály Csíkszentmihályi"],a:1,e:"Joseph Campbell, in 'The Hero With a Thousand Faces' (1949)."},
-  {t:"Story",q:"In effective brand storytelling, the brand should be:",o:["The main hero","Part of the story's context, not the protagonist","Never mentioned","The villain"],a:1,e:"The brand is context; characters (not the brand) are protagonists and showcase its values."},
-  {t:"Story",q:"Why are vulnerable characters effective?",o:["They are cheaper to produce","Audiences form a stronger emotional connection with authentic, struggling characters","They guarantee virality","They avoid controversy"],a:1,e:"The more vulnerable a character seems, the closer the audience feels."},
+  {t:"Brand",q:"The four levers of 21st-century differentiation are experience, values, connection with the brand and:",o:["Lowest price","Mass advertising","Extended product","Celebrity endorsement"],a:2,e:"Differentiation: experience, values, extended product, connection with the brand."},
+  {t:"Brand",q:"A brand becomes 'relevant' when it:",o:["Has the biggest ad budget","Opens the most stores","Has the lowest prices","Connects with the desires, needs and aspirations of its audience"],a:3,e:"Relevance = connecting with the audience's desires, needs and aspirations."},
+  {t:"Brand",q:"In Kotler's 5 A's, which is the final stage?",o:["Advocate","Act","Ask","Appeal"],a:0,e:"Aware → Appeal → Ask → Act → Advocate; advocacy is the goal."},
+  {t:"Brand",q:"In the automotive example, of ~24 touchpoints how many were digital?",o:["About 5","About 19","About 12","All 24"],a:1,e:"About 19 of ~24 touchpoints were digital — showing digital dominance."},
+  {t:"Story",q:"The Hero's Journey was popularised by:",o:["Philip Kotler","David Chaffey","Joseph Campbell","Mihály Csíkszentmihályi"],a:2,e:"Joseph Campbell, in 'The Hero With a Thousand Faces' (1949)."},
+  {t:"Story",q:"In effective brand storytelling, the brand should be:",o:["The main hero","The villain","Never mentioned","Part of the story's context, not the protagonist"],a:3,e:"The brand is context; characters (not the brand) are protagonists and showcase its values."},
+  {t:"Story",q:"Why are vulnerable characters effective?",o:["Audiences form a stronger emotional connection with authentic, struggling characters","They are cheaper to produce","They guarantee virality","They avoid controversy"],a:0,e:"The more vulnerable a character seems, the closer the audience feels."},
   {t:"Story",q:"Liquid Death's storytelling strategy is best described as:",o:["Corporate and formal","Turning a boring commodity into entertainment","Informational about water purity","Luxury positioning"],a:1,e:"It solves the 'boring product' paradox by making water marketing fun ('murder your thirst')."},
-  {t:"Story",q:"Ryanair's social approach is an example of:",o:["Radical transparency / the 'villain' arc","Premium luxury branding","Avoiding all interaction","Corporate apologies"],a:0,e:"Radical transparency — agreeing with haters and roasting back; admitting it's cheap builds trust."},
-  {t:"Mobile",q:"Per the MMA, mobile marketing engages audiences:",o:["Only via SMS","In an interactive and relevant manner through any mobile device or network","Exclusively through apps","Through television only"],a:1,e:"MMA: engaging audiences interactively and relevantly through/with any mobile device or network."},
-  {t:"Mobile",q:"A PUSH mobile tactic is one where:",o:["The user searches for the brand","The brand initiates and sends the message","The user scans a QR code","The user opens the app themselves"],a:1,e:"Push = brand-initiated; pull = user-initiated."},
+  {t:"Story",q:"Ryanair's social approach is an example of:",o:["Premium luxury branding","Avoiding all interaction","Radical transparency / the 'villain' arc","Corporate apologies"],a:2,e:"Radical transparency — agreeing with haters and roasting back; admitting it's cheap builds trust."},
+  {t:"Mobile",q:"Per the MMA, mobile marketing engages audiences:",o:["Only via SMS","Exclusively through apps","Through television only","In an interactive and relevant manner through any mobile device or network"],a:3,e:"MMA: engaging audiences interactively and relevantly through/with any mobile device or network."},
+  {t:"Mobile",q:"A PUSH mobile tactic is one where:",o:["The brand initiates and sends the message","The user searches for the brand","The user scans a QR code","The user opens the app themselves"],a:0,e:"Push = brand-initiated; pull = user-initiated."},
   {t:"Mobile",q:"Which format is noted for ~98% open rates?",o:["Display banners","SMS/MMS","Push email","Web pop-ups"],a:1,e:"SMS/MMS is cited with ~98% open rates."},
   {t:"Mobile",q:"App vs mobile browser conversion-rate uplift is about:",o:["+23%","+85%","+130%","+286%"],a:2,e:"App conversion was about +130% vs mobile browser."},
-  {t:"Mobile",q:"ASO stands for:",o:["Ad Spend Optimisation","App Store Optimization","Audience Segmentation Online","Automated Sales Outreach"],a:1,e:"ASO = App Store Optimization."},
-  {t:"SEO",q:"MOZ defines SEO as increasing traffic through:",o:["Paid search ads","Organic search engine results","Social media posts","Email campaigns"],a:1,e:"SEO increases quantity and quality of traffic via organic results."},
-  {t:"SEO",q:"'Nike running shoes on sale' is which search intent?",o:["Informational","Navigational","Transactional","Commercial-only"],a:2,e:"Intent to buy → transactional, surfacing Shopping Ads."},
+  {t:"Mobile",q:"ASO stands for:",o:["Ad Spend Optimisation","Audience Segmentation Online","Automated Sales Outreach","App Store Optimization"],a:3,e:"ASO = App Store Optimization."},
+  {t:"SEO",q:"MOZ defines SEO as increasing traffic through:",o:["Organic search engine results","Paid search ads","Social media posts","Email campaigns"],a:0,e:"SEO increases quantity and quality of traffic via organic results."},
+  {t:"SEO",q:"'Nike running shoes on sale' is which search intent?",o:["Informational","Transactional","Navigational","Commercial-only"],a:1,e:"Intent to buy → transactional, surfacing Shopping Ads."},
   {t:"SEO",q:"'Zara store Barcelona' best represents which intent?",o:["Informational","Transactional","Navigational","Generative"],a:2,e:"Looking for a place/brand location is navigational (Local Map Pack)."},
-  {t:"SEO",q:"GEO (Generative Engine Optimization) aims to:",o:["Rank #1 on SERPs","Be cited by AI-generated answers","Increase PPC bids","Build more backlinks only"],a:1,e:"GEO = being chosen/cited as a trusted source within AI responses."},
-  {t:"SEO",q:"On the demand curve, the 'long tail' is roughly what share of traffic?",o:["~18.5%","~11.5%","~70%","~5%"],a:2,e:"Long-tail ≈ 70%; fat head ~18.5%; chunky middle ~11.5%."},
+  {t:"SEO",q:"GEO (Generative Engine Optimization) aims to:",o:["Rank #1 on SERPs","Increase PPC bids","Build more backlinks only","Be cited by AI-generated answers"],a:3,e:"GEO = being chosen/cited as a trusted source within AI responses."},
+  {t:"SEO",q:"On the demand curve, the 'long tail' is roughly what share of traffic?",o:["~70%","~18.5%","~11.5%","~5%"],a:0,e:"Long-tail ≈ 70%; fat head ~18.5%; chunky middle ~11.5%."},
   {t:"SEO",q:"Which is a BLACK-HAT SEO tactic?",o:["Canonical URLs","Keyword stuffing","Responsive design","Alt text"],a:1,e:"Cloaking and keyword stuffing are black-hat."},
-  {t:"Ads",q:"A full-page pop-up is notable because it:",o:["Is heavily penalised by search engines","Is closable by a button and NOT penalised by search engines","Cannot be closed","Only appears on mobile"],a:1,e:"Full-page pop-ups take the whole screen, are closable, annoy users, but are not penalised."},
-  {t:"Ads",q:"A 'bumper' video ad is:",o:["A 30-minute ad","A very short (≤6s) non-skippable ad","An expanding banner","An audio-only ad"],a:1,e:"Bumper ads are ≤6s and non-skippable."},
+  {t:"Ads",q:"A full-page pop-up is notable because it:",o:["Is heavily penalised by search engines","Cannot be closed","Is closable by a button and NOT penalised by search engines","Only appears on mobile"],a:2,e:"Full-page pop-ups take the whole screen, are closable, annoy users, but are not penalised."},
+  {t:"Ads",q:"A 'bumper' video ad is:",o:["A 30-minute ad","An expanding banner","An audio-only ad","A very short (≤6s) non-skippable ad"],a:3,e:"Bumper ads are ≤6s and non-skippable."},
   {t:"Ads",q:"In programmatic advertising, a DSP is a:",o:["Demand-Side Platform used by advertisers to bid","Data Storage Provider","Direct Sales Partner","Display Standard Protocol"],a:0,e:"DSP = Demand-Side Platform (advertisers bid); SSP = Supply-Side Platform (publishers)."},
   {t:"Ads",q:"In the RTB flow, who 'triggers the process'?",o:["The advertiser","The user visiting a website","The ad exchange","The data provider"],a:1,e:"A user visiting a site triggers the auction; the SSP offers the impression."},
-  {t:"Ads",q:"In a social-ads account, the correct hierarchy is:",o:["Ad → Ad Set → Campaign","Campaign → Ad Set → Ad","Ad Set → Campaign → Ad","Campaign → Ad → Ad Set"],a:1,e:"Campaign (objective) → Ad Set (audience/budget) → Ad (creative)."},
-  {t:"Ads",q:"For an AWARENESS objective, the common metric is:",o:["CPA","CPM","CPC","CPL"],a:1,e:"Awareness → reach/impressions, measured by CPM."},
-  {t:"PB",q:"'Personal branding' (vs a personal brand) is best defined as:",o:["The perception others already hold of you","The conscious, intentional effort to create and influence public perception","Your CV","Your follower count"],a:1,e:"The brand is the perception; branding is the conscious effort to shape it."},
+  {t:"Ads",q:"In a social-ads account, the correct hierarchy is:",o:["Ad → Ad Set → Campaign","Ad Set → Campaign → Ad","Campaign → Ad Set → Ad","Campaign → Ad → Ad Set"],a:2,e:"Campaign (objective) → Ad Set (audience/budget) → Ad (creative)."},
+  {t:"Ads",q:"For an AWARENESS objective, the common metric is:",o:["CPA","CPC","CPL","CPM"],a:3,e:"Awareness → reach/impressions, measured by CPM."},
+  {t:"PB",q:"'Personal branding' (vs a personal brand) is best defined as:",o:["The conscious, intentional effort to create and influence public perception","The perception others already hold of you","Your CV","Your follower count"],a:0,e:"The brand is the perception; branding is the conscious effort to shape it."},
   {t:"PB",q:"Defining your mission, vision and values falls under which area?",o:["Image","Direction","Logistics","Selling"],a:1,e:"'Direction' covers mission, vision, values — role, goal, principles."},
-  {t:"PB",q:"Networking remains the No. 1 cause of:",o:["Brand awareness","Job attainment","Social media growth","Product sales"],a:1,e:"Citing Lancaster (2015), networking is the No.1 cause of job attainment."},
-  {t:"PB",q:"Recommended elevator-pitch length is approximately:",o:["5–10 seconds","30–90 seconds","3–5 minutes","10+ minutes"],a:1,e:"~30–90 seconds, ~90–270 words, 8–24 sentences."},
-  {t:"PB",q:"In a SWOT, Opportunities and Threats are:",o:["Internal factors","External factors","Always negative","Financial metrics"],a:1,e:"Strengths/Weaknesses internal; Opportunities/Threats external."},
+  {t:"PB",q:"Networking remains the No. 1 cause of:",o:["Brand awareness","Social media growth","Job attainment","Product sales"],a:2,e:"Citing Lancaster (2015), networking is the No.1 cause of job attainment."},
+  {t:"PB",q:"Recommended elevator-pitch length is approximately:",o:["5–10 seconds","3–5 minutes","10+ minutes","30–90 seconds"],a:3,e:"~30–90 seconds, ~90–270 words, 8–24 sentences."},
+  {t:"PB",q:"In a SWOT, Opportunities and Threats are:",o:["External factors","Internal factors","Always negative","Financial metrics"],a:0,e:"Strengths/Weaknesses internal; Opportunities/Threats external."},
   {t:"PB",q:"Which is one of the '7 capital sins of personal branding'?",o:["Consistency","Inconsistency","Humility","Planning"],a:1,e:"The 7 sins include falsehood, demotivation, inconsistency, selfishness, vanity, staggering, reckless ambition."},
-  {t:"Inbound",q:"Per HubSpot, inbound marketing:",o:["Interrupts audiences with unwanted content","Attracts customers with valuable, tailored content","Relies on cold calls","Is the same as outbound"],a:1,e:"Inbound attracts via valuable, tailored content; outbound interrupts."},
-  {t:"Inbound",q:"The inbound methodology stages are:",o:["Attract → Convert → Close → Delight","Reach → Bid → Win → Serve","Aware → Appeal → Ask → Act","Crawl → Index → Rank → Cite"],a:0,e:"Attract → Convert → Close → Delight."},
-  {t:"Inbound",q:"A 'lead magnet' is:",o:["A paid ad placement","Gated content exchanged for a prospect's information","A CRM tool","A social algorithm"],a:1,e:"Gated content (e-books, demos, discounts) given for prospect information."},
+  {t:"Inbound",q:"Per HubSpot, inbound marketing:",o:["Interrupts audiences with unwanted content","Relies on cold calls","Attracts customers with valuable, tailored content","Is the same as outbound"],a:2,e:"Inbound attracts via valuable, tailored content; outbound interrupts."},
+  {t:"Inbound",q:"The inbound methodology stages are:",o:["Reach → Bid → Win → Serve","Aware → Appeal → Ask → Act","Crawl → Index → Rank → Cite","Attract → Convert → Close → Delight"],a:3,e:"Attract → Convert → Close → Delight."},
+  {t:"Inbound",q:"A 'lead magnet' is:",o:["Gated content exchanged for a prospect's information","A paid ad placement","A CRM tool","A social algorithm"],a:0,e:"Gated content (e-books, demos, discounts) given for prospect information."},
   {t:"Inbound",q:"In BANT, the letters stand for:",o:["Brand, Audience, Need, Time","Budget, Authority, Need, Time","Budget, Awareness, Network, Trust","Brand, Authority, Niche, Target"],a:1,e:"BANT = Budget, Authority, Need, Time."},
-  {t:"Inbound",q:"'Implicit scoring' of a lead is based on:",o:["Directly shared data like job title","Monitored behaviour like opened emails and clicks","The salesperson's intuition","Company revenue only"],a:1,e:"Implicit = behaviour (opens, clicks, calls); explicit = shared data (job, income, age)."},
-  {t:"Inbound",q:"Advergaming combines advertising with:",o:["Email marketing","Entertainment","Public relations","Accounting"],a:1,e:"Advergaming = advertising + entertainment via games."},
-  {t:"Inbound",q:"The 'flow state' (challenge matching skill) is associated with:",o:["Joseph Campbell","Mihály Csíkszentmihályi","Philip Kotler","Jane McGonigal"],a:1,e:"Flow was developed by Mihály Csíkszentmihályi — between anxiety and boredom."},
+  {t:"Inbound",q:"'Implicit scoring' of a lead is based on:",o:["Directly shared data like job title","The salesperson's intuition","Monitored behaviour like opened emails and clicks","Company revenue only"],a:2,e:"Implicit = behaviour (opens, clicks, calls); explicit = shared data (job, income, age)."},
+  {t:"Inbound",q:"Advergaming combines advertising with:",o:["Email marketing","Public relations","Accounting","Entertainment"],a:3,e:"Advergaming = advertising + entertainment via games."},
+  {t:"Inbound",q:"The 'flow state' (challenge matching skill) is associated with:",o:["Mihály Csíkszentmihályi","Joseph Campbell","Philip Kotler","Jane McGonigal"],a:0,e:"Flow was developed by Mihály Csíkszentmihályi — between anxiety and boredom."},
   {t:"Inbound",q:"The correct lead-temperature progression is:",o:["Hot → Warm → Cold","Cold → Warm → Hot","Warm → Cold → Hot","Cold → Hot → Warm"],a:1,e:"Leads progress Cold → Warm → Hot as interest rises."}
-];
+],
+  "Test 2":[
+  {t:"Intro",q:"Baker (1987) framed marketing primarily as a process of:",o:["Exchange for mutual benefit and satisfaction","Mass production","Cost reduction","Advertising"],a:0,e:"Baker (1987) defined marketing as a process of exchange between parties for mutual benefit and satisfaction."},
+  {t:"Intro",q:"Which era is 'human-centric', focusing on values and the human spirit?",o:["Marketing 2.0","Marketing 3.0","Marketing 4.0","Marketing 5.0"],a:1,e:"Marketing 3.0 is human-centric — values, emotions and the human spirit."},
+  {t:"Intro",q:"Dividing a broad market into subsets with common needs is called:",o:["Positioning","Targeting","Segmentation","Differentiation"],a:2,e:"Segmentation divides a market into subsets with shared needs/characteristics."},
+  {t:"Intro",q:"Building a 'differential advantage' so an offer is preferred is the essence of:",o:["Segmentation","Distribution","Pricing","Positioning"],a:3,e:"Positioning creates differentiation so the offer is preferred over competitors'."},
+  {t:"Intro",q:"In B2B, segmentation can additionally be done by:",o:["Business units","Shoe size","Star sign","Hair colour"],a:0,e:"In B2B markets, segmentation can be done by business units."},
+  {t:"M5.0",q:"Which is NOT one of the five Marketing 5.0 components?",o:["Predictive","Transactional","Contextual","Augmented"],a:1,e:"The five are Data-Driven, Agile, Predictive, Contextual, Augmented — not 'Transactional'."},
+  {t:"M5.0",q:"'Decentralised teams, fast deployment, high adaptability' describes:",o:["Data-Driven Marketing","Predictive Marketing","Agile Marketing","Contextual Marketing"],a:2,e:"Agile Marketing uses decentralised teams that deploy fast with high adaptability."},
+  {t:"M5.0",q:"Apple's ATT framework requires users to:",o:["Pay for tracking","Disable all ads","Share their contacts","Opt in before being tracked across apps"],a:3,e:"App Tracking Transparency requires explicit opt-in before cross-app tracking."},
+  {t:"M5.0",q:"A listed benefit of Marketing 5.0 is the ability to:",o:["Predict the outcomes of strategies and tactics","Eliminate all competitors","Remove the need for data","Avoid digital channels"],a:0,e:"Marketing 5.0 lets firms predict outcomes of strategies/tactics, among other benefits."},
+  {t:"M5.0",q:"Globally, the dominant share of forecast ad spend has shifted to:",o:["Print","Internet/digital","Radio","Outdoor"],a:1,e:"Most ad spend has shifted to internet/digital versus TV, print, radio and outdoor."},
+  {t:"Brand",q:"'Today at Apple' sessions illustrate differentiation through:",o:["Price","Distribution","Experience","Packaging"],a:2,e:"Experiential activities (photography, coding, editing) differentiate through experience."},
+  {t:"Brand",q:"Nike's Run Club and Training Club are examples of:",o:["Price cuts","Outdoor advertising","Cold calling","Extended product + customer connection"],a:3,e:"They extend the product and build customer connection/community."},
+  {t:"Brand",q:"In the 5A path, the stage right before 'Act' is:",o:["Ask","Aware","Appeal","Advocate"],a:0,e:"Aware → Appeal → Ask → Act → Advocate, so 'Ask' precedes 'Act'."},
+  {t:"Brand",q:"Street marketing is described as moving a brand from:",o:["Price to premium","Awareness to relevance","Online to offline","B2B to B2C"],a:1,e:"Street marketing pushes a brand from awareness to relevance."},
+  {t:"Brand",q:"The shift emphasised in modern branding is from transactions to:",o:["Discounts","Commissions","Relationships","Impressions"],a:2,e:"Modern branding favours relationships over one-off transactions."},
+  {t:"Story",q:"Storytelling is defined as connecting with an audience through:",o:["Discount codes","Banner ads only","Price lists","A story that has meaning to them"],a:3,e:"Storytelling connects via a story that carries meaning, through any medium."},
+  {t:"Story",q:"Which is an element 'all great stories share'?",o:["Narrative arc","Return policy","Pricing table","Shipping cost"],a:0,e:"Great stories share setting, characters, plot, conflict, theme and a narrative arc."},
+  {t:"Story",q:"In the Hero's Journey, the hero crosses a threshold from the known into the:",o:["Market","Unknown","Budget","Funnel"],a:1,e:"The hero leaves the known world and crosses into the unknown."},
+  {t:"Story",q:"Burger King / Wendy's social presence exemplifies:",o:["Luxury positioning","Pure price competition","Telling a story without telling it","Avoiding social media"],a:2,e:"Their playful, reactive social presence is 'telling without telling'."},
+  {t:"Story",q:"A 'historical' story type typically evokes:",o:["Fear","Confusion","Urgency to buy now","Nostalgia and reputation"],a:3,e:"Historical stories draw on years of experience and reputation, evoking nostalgia."},
+  {t:"Mobile",q:"Which is a PULL mobile interaction?",o:["A user scanning a QR code","A push notification","An SMS alert","A geofenced banner pushed to a phone"],a:0,e:"Pull is user-initiated — e.g. scanning a QR code or searching."},
+  {t:"Mobile",q:"Geofencing enables:",o:["Faster downloads","Location-based targeting","Cheaper hosting","Email automation"],a:1,e:"Geofencing targets users based on a defined geographic boundary."},
+  {t:"Mobile",q:"A strategic role of a mobile app is to act as a:",o:["Tax form","Printer driver","Loyalty tool, distribution channel and revenue source","Search engine"],a:2,e:"Apps serve as loyalty tools, distribution channels and revenue sources."},
+  {t:"Mobile",q:"Roughly what share of apps are uninstalled quickly (a listed challenge)?",o:["~5%","~50%","~75%","~28%"],a:3,e:"About 28% of apps are uninstalled quickly — a key challenge."},
+  {t:"Mobile",q:"The IKEA app case is best known for using:",o:["Augmented reality to place furniture","Cold email","Radio ads","Billboards"],a:0,e:"IKEA's app lets users place furniture in their space via AR."},
+  {t:"Mobile",q:"A drawback of mobile marketing is:",o:["Unlimited screen space","Small screen size and constrained GUI","No tracking possible","No personalisation"],a:1,e:"Cons include small screen size, technical limits and a constrained GUI."},
+  {t:"SEO",q:"Search engines fundamentally work by:",o:["Guessing randomly","Buy → Bid → Serve","Crawl → Index → Rank","Email → Open → Click"],a:2,e:"Engines crawl pages, index them, then rank them for queries."},
+  {t:"SEO",q:"A query like 'What is the Metaverse?' is which intent?",o:["Transactional","Navigational","Commercial","Informational"],a:3,e:"A 'what is' query is informational, often surfacing snippets and knowledge graph."},
+  {t:"SEO",q:"In E-E-A-T, the second 'E' stands for:",o:["Expertise","Email","Engagement","Equity"],a:0,e:"E-E-A-T = Experience, Expertise, Authoritativeness, Trust."},
+  {t:"SEO",q:"A recommended title-tag length is approximately:",o:["10–20 characters","50–60 characters","150–300 characters","Over 500 characters"],a:1,e:"Titles ~50–60 characters; meta descriptions ~150–300 characters."},
+  {t:"SEO",q:"In generative search, 'RAG' stands for:",o:["Rapid Ad Generation","Ranking Algorithm Guide","Retrieval-Augmented Generation","Real Audience Growth"],a:2,e:"LLMs use Retrieval-Augmented Generation to gather data before answering."},
+  {t:"SEO",q:"The key distinction: SEM is ___ while SEO is ___.",o:["Organic / paid","Social / email","Mobile / desktop","Paid / organic"],a:3,e:"SEM = paid search visibility; SEO = organic, earned visibility."},
+  {t:"Ads",q:"Listed banner types include trap (clickbait), impulsive and:",o:["Retention","Outstream","Skippable","Programmatic"],a:0,e:"Banner types: trap (clickbait), impulsive, retention."},
+  {t:"Ads",q:"An SSP (Supply-Side Platform) is used by:",o:["Advertisers to bid","Publishers to offer inventory","Banks to lend","Users to browse"],a:1,e:"SSPs let publishers offer and manage ad inventory; DSPs are the advertiser side."},
+  {t:"Ads",q:"Which is a listed RTB campaign type?",o:["Cloaking","Keyword stuffing","Retargeting","Crawling"],a:2,e:"RTB campaign types: Prospecting, Targeting, Retargeting."},
+  {t:"Ads",q:"A 'lookalike audience' is built by:",o:["Uploading a contact list directly","Targeting only past visitors","Picking random demographics","Finding new users similar to a seed audience"],a:3,e:"Lookalikes find new users resembling an existing seed/custom audience."},
+  {t:"Ads",q:"For a CONVERSION objective, the typical metric is:",o:["CPA","CPM","CPV","Reach"],a:0,e:"Conversion → leads/sales/installs measured by CPA."},
+  {t:"Ads",q:"Compared with organic social, paid social offers:",o:["Earned but limited reach","Faster, targeted, measurable reach","No analytics","Guaranteed virality"],a:1,e:"Paid social is targeted, fast and measurable (ROAS, CPC, CTR)."},
+  {t:"PB",q:"A personal brand is best described as:",o:["A logo you design","A social media handle","A widely-recognised perception of an individual based on their experience and achievements","A business card"],a:2,e:"It's the recognised perception of a person built on experience, expertise and achievements."},
+  {t:"PB",q:"Which area of the personal-branding model defines your USP?",o:["Logistics","Operations","Image","Product"],a:3,e:"'Product' defines what you do and the benefits of your USP."},
+  {t:"PB",q:"An elevator pitch should cover about you, what you offer and:",o:["The benefits","Your salary","Your weaknesses","Your competitors' prices"],a:0,e:"Cover: about you, what you offer, and the benefits."},
+  {t:"PB",q:"In SWOT, Strengths and Weaknesses are:",o:["External factors","Internal factors","Always financial","Competitor data"],a:1,e:"Strengths/Weaknesses are internal; Opportunities/Threats are external."},
+  {t:"PB",q:"Online Reputation Management monitors all EXCEPT:",o:["What they say","Who is saying it","The production cost","The intention"],a:2,e:"ORM tracks what is said, how, where, who and the intention — not production cost."},
+  {t:"PB",q:"The 'Caregiver' and 'Explorer' are examples of:",o:["KPIs","Ad formats","Search intents","Brand archetypes"],a:3,e:"They are brand archetypes, each tied to a core human drive."},
+  {t:"Inbound",q:"Outbound marketing is characterised as:",o:["Push — interrupting with unwanted messages","Pull — clients come to the brand","Content-led","Permission-based"],a:0,e:"Outbound pushes/interrupts; inbound pulls via useful content."},
+  {t:"Inbound",q:"In the inbound methodology, forms, CTAs and landing pages belong to which stage?",o:["Attract","Convert","Close","Delight"],a:1,e:"Convert uses forms, newsletters, CTAs and landing pages."},
+  {t:"Inbound",q:"In MEDDIC, the 'C' stands for:",o:["Cost","Customer","Champion","Conversion"],a:2,e:"MEDDIC = Metrics, Economic buyer, Decision criteria, Decision process, Identify pain, Champion."},
+  {t:"Inbound",q:"'Explicit scoring' uses:",o:["Monitored behaviour like clicks","Salesperson intuition","Random sampling","Directly shared data like job, income, age"],a:3,e:"Explicit scoring uses directly shared/observable data; implicit uses behaviour."},
+  {t:"Inbound",q:"An 'A1' lead means:",o:["High explicit (A) and high implicit (1)","Low explicit, low implicit","A cold lead to discard","An unqualified lead"],a:0,e:"Combining scales, A1 = high explicit + high implicit → a hot lead."},
+  {t:"Inbound",q:"Which spans the advergaming spectrum from static to immersive?",o:["Email → SMS → call","Casual games → … → virtual realities","Banner → pop-up → video","SEO → SEM → GEO"],a:1,e:"The spectrum runs casual games, advergames, video games, MMOGs, MMORPGs, virtual realities."}
+],
+  "Test 3":[
+  {t:"Intro",q:"'The aim of marketing is to create value for customers in order to capture value in return' reflects which view?",o:["Relationship marketing (Kotler)","Transactional selling","Production orientation","Sales orientation"],a:0,e:"This is Kotler's relationship view of marketing."},
+  {t:"Intro",q:"Marketing 2.0 is best described as:",o:["Product-centric","Customer-centric","Human-centric","Digital-centric"],a:1,e:"2.0 is customer-centric — satisfy and retain the customer."},
+  {t:"Intro",q:"The final step of the STP sequence is:",o:["Segmentation","Targeting","Positioning","Production"],a:2,e:"STP ends with Positioning (building a differential advantage)."},
+  {t:"Intro",q:"Choosing which segment(s) to serve is:",o:["Segmentation","Positioning","Branding","Targeting"],a:3,e:"Targeting is selecting the segment(s) to pursue."},
+  {t:"Intro",q:"Denner (1971) emphasised analysing demand and satisfying it:",o:["Profitably","For free","Slowly","Locally"],a:0,e:"Denner stressed satisfying demand profitably."},
+  {t:"M5.0",q:"Marketing 5.0 is built on technology that:",o:["Replaces all humans","Mimics human marketers to create value","Ignores customer data","Only automates billing"],a:1,e:"It uses tech mimicking human marketers across the journey."},
+  {t:"M5.0",q:"'Anticipating outcomes before acting' is which application?",o:["Agile Marketing","Data-Driven Marketing","Predictive Marketing","Contextual Marketing"],a:2,e:"Predictive Marketing anticipates outcomes for customer, product and brand management."},
+  {t:"M5.0",q:"IDFA primarily enables:",o:["Faster Wi-Fi","Cheaper phones","Better cameras","Cross-device tracking via a per-device ID"],a:3,e:"IDFA is a per-device identifier enabling cross-device tracking."},
+  {t:"M5.0",q:"The 'CTV avalanche' blends TV reach with:",o:["Digital targeting and measurement","Radio jingles","Print coupons","Door-to-door sales"],a:0,e:"Connected TV combines TV reach with digital targeting and measurement."},
+  {t:"M5.0",q:"Which pair are the Marketing 5.0 disciplines?",o:["Predictive & Augmented","Data-Driven & Agile","Contextual & Predictive","Agile & Contextual"],a:1,e:"Disciplines: Data-Driven and Agile."},
+  {t:"Brand",q:"'The fastest route to a customer's heart is through their ___.'",o:["Wallet","Inbox","Emotions","Calendar"],a:2,e:"Differentiation often works through emotions."},
+  {t:"Brand",q:"Pop-up stores are mainly used to:",o:["Cut staffing costs","Replace e-commerce","Store inventory","Get new eyes on the brand with memorable experiences"],a:3,e:"Pop-ups get new eyes on the brand via everyday or extraordinary experiences."},
+  {t:"Brand",q:"Starbucks' app, rewards and AI personalisation illustrate:",o:["Personalised marketing + experience","Outbound cold calls","Pure price discounting","Billboard advertising"],a:0,e:"They combine personalised marketing with experience."},
+  {t:"Brand",q:"The 5 A's begin with which stage?",o:["Ask","Aware","Act","Advocate"],a:1,e:"The path starts at Aware."},
+  {t:"Brand",q:"A key implication of digital-dominated journeys is that:",o:["Offline is irrelevant","Only TV matters","Traditional and digital must work together","Email is obsolete"],a:2,e:"Because journeys mix many digital touchpoints with some offline ones, both must integrate."},
+  {t:"Story",q:"The evolution of storytelling forms ends (so far) with:",o:["Spoken","Written","Audiovisual","Interactive"],a:3,e:"Spoken → Visual → Written → Audiovisual → Interactive."},
+  {t:"Story",q:"Keeping the brand as 'context' means:",o:["Letting characters carry the brand's values","Hiding the product forever","Never naming the brand","Using only logos"],a:0,e:"The brand is context while characters showcase its values."},
+  {t:"Story",q:"Ben & Jerry's climate-strike closure is cited under which story-building step?",o:["Pick a price","Ideas & values the brand wants to convey","Choose a font","Buy media"],a:1,e:"It illustrates conveying brand ideas and values."},
+  {t:"Story",q:"The vulnerability principle says audiences bond with characters who are:",o:["Flawless and powerful","Anonymous and rich","Authentic and struggling","Loud and aggressive"],a:2,e:"Vulnerable, authentic, struggling characters create closeness."},
+  {t:"Story",q:"Liquid Death markets water as:",o:["Pure hydration","A luxury good","A medical product","'Murdering your thirst' (entertainment)"],a:3,e:"It reframes a boring commodity as entertainment."},
+  {t:"Story",q:"Ryanair's near-zero production value (smartphone filters) helps it to:",o:["Hijack trends instantly and feel authentic","Look premium","Avoid social media","Target only luxury buyers"],a:0,e:"Low production value lets it react to trends fast and feel authentic."},
+  {t:"Mobile",q:"The MMA definition stresses engaging audiences:",o:["Passively","Interactively and relevantly","Only via email","Once per year"],a:1,e:"Interactive and relevant engagement through any mobile device or network."},
+  {t:"Mobile",q:"Push notifications are an example of:",o:["Pull","SEO","Push","SEM"],a:2,e:"Push notifications are brand-initiated (push)."},
+  {t:"Mobile",q:"Around what share of global web traffic is mobile?",o:["10%+","30%+","90%+","60%+"],a:3,e:"60%+ of global web traffic is mobile."},
+  {t:"Mobile",q:"ASO improves an app's:",o:["Store visibility and ranking","Battery life","Screen size","Price"],a:0,e:"App Store Optimization improves visibility and ranking."},
+  {t:"Mobile",q:"The Sephora case highlights:",o:["Radio advertising","App + in-store integration","Print catalogues","Cold calling"],a:1,e:"Sephora integrates its app with the in-store experience."},
+  {t:"Mobile",q:"A benefit of mobile marketing is:",o:["Larger screens than desktop","No need for consent","Immediate response and interactivity","Unlimited battery"],a:2,e:"Benefits include personalisation, immediate response and interactivity."},
+  {t:"SEO",q:"MOZ's SEO definition focuses on traffic that is:",o:["Paid","Bought","Emailed","Organic"],a:3,e:"SEO is about organic search traffic."},
+  {t:"SEO",q:"A navigational query typically surfaces:",o:["The Local Map Pack","Shopping ads only","A paywall","A login screen"],a:0,e:"Navigational queries often show the Local Map Pack."},
+  {t:"SEO",q:"By 2026, roughly what share of searches may occur through AI engines (Gartner)?",o:["~5%","~30%","~60%","~90%"],a:1,e:"Gartner (2024) estimates ~30% by 2026."},
+  {t:"SEO",q:"Long-tail keywords are characterised by:",o:["Very high volume each","Being black-hat","Many low-volume terms carrying ~70% of traffic","Being paid only"],a:2,e:"Long tail = many low-volume terms summing to ~70% of traffic."},
+  {t:"SEO",q:"Cloaking is best described as:",o:["A white-hat tactic","A KPI","A SERP feature","A black-hat tactic"],a:3,e:"Cloaking is a black-hat tactic to avoid."},
+  {t:"SEO",q:"AEO optimises primarily for:",o:["Direct answers (snippets, FAQ, voice)","Backlinks","Banner clicks","Email opens"],a:0,e:"Answer Engine Optimization targets direct answers rather than clicks."},
+  {t:"Ads",q:"A full-page pop-up, unlike many intrusive formats, is:",o:["Always penalised by Google","Not penalised by search engines","Impossible to close","Audio-only"],a:1,e:"Full-page pop-ups are closable and not penalised by search engines."},
+  {t:"Ads",q:"Which video format plays outside of video content, e.g. in feeds?",o:["Bumper","Non-skippable","Outstream","Discovery"],a:2,e:"Outstream plays outside video content (in feeds/sites)."},
+  {t:"Ads",q:"The component that runs the real-time auction is the:",o:["CRM","Email server","CDN","Ad exchange"],a:3,e:"The ad exchange hosts the real-time auction between DSPs and SSPs."},
+  {t:"Ads",q:"In RTB, the winning bid is the one that is:",o:["Highest","Lowest","Random","Oldest"],a:0,e:"The highest bid wins and the ad is served."},
+  {t:"Ads",q:"The middle level of a social-ads account (audience, budget, placements) is the:",o:["Campaign","Ad Set","Ad","Account"],a:1,e:"Ad Set holds audience, budget, schedule and placements."},
+  {t:"Ads",q:"A 'custom audience' can be built from:",o:["Random strangers","Competitor staff","Your contact lists, app users or site visitors","Public holidays"],a:2,e:"Custom audiences use your own lists, app users or site visitors."},
+  {t:"PB",q:"Personal branding positions a person as a(n):",o:["Follower","Intern","Bystander","Authority"],a:3,e:"It positions the person as an authority, elevating credibility."},
+  {t:"PB",q:"'What moves you, scares you, what you believe in' maps to which area?",o:["Persona","Logistics","Selling","Operations"],a:0,e:"'Persona' captures what moves you, scares you and what you believe in."},
+  {t:"PB",q:"Networking is defined (Merriam-Webster) as the cultivation of productive relationships for:",o:["Hobbies only","Employment or business","Tax purposes","Travel"],a:1,e:"It's cultivating productive relationships for employment or business."},
+  {t:"PB",q:"Threats in a SWOT are:",o:["Internal and positive","Internal and negative","External and negative","External and positive"],a:2,e:"Threats are external and negative."},
+  {t:"PB",q:"'Vanity' and 'Inconsistency' are examples of the:",o:["Four Ps","Five A's","Three disciplines","7 capital sins of personal branding"],a:3,e:"They are among the 7 capital sins of personal branding."},
+  {t:"PB",q:"Which set lists qualities to 'keep in mind' for a personal brand?",o:["Patience, Planning, Responsibility, Perseverance, Passion","Price, Place, Promotion","Crawl, Index, Rank","Aware, Appeal, Ask"],a:0,e:"Patience, Planning, Responsibility, Perseverance, Passion."},
+  {t:"Inbound",q:"Inbound forms connections the audience is:",o:["Trying to avoid","Already looking for","Forced into","Charged for"],a:1,e:"Inbound forms connections people are looking for and solves existing problems."},
+  {t:"Inbound",q:"The final stage of the inbound methodology is:",o:["Attract","Convert","Delight","Close"],a:2,e:"Attract → Convert → Close → Delight."},
+  {t:"Inbound",q:"BANT's 'A' stands for:",o:["Awareness","Audience","Analytics","Authority"],a:3,e:"BANT = Budget, Authority, Need, Time."},
+  {t:"Inbound",q:"Implicit lead scoring is scaled as:",o:["1, 2, 3","A, B, C","X, Y, Z","Gold, Silver, Bronze"],a:0,e:"Implicit (behaviour) is scaled 1/2/3; explicit (data) is scaled A/B/C."},
+  {t:"Inbound",q:"The flow 'channel' lies between:",o:["Profit and loss","Anxiety (too hard) and boredom (too easy)","Push and pull","SEO and SEM"],a:1,e:"Flow is the optimal channel between anxiety and boredom (Csíkszentmihályi)."}
+]
+};
 
 /* ============ THEME ============ */
 const root=document.documentElement;
@@ -1326,72 +1439,115 @@ GLOSSARY.slice().sort((a,b)=>a[0].localeCompare(b[0])).forEach(([t,d])=>{
 
 /* ============ QUIZ ENGINE (one at a time + ring) ============ */
 const mount=document.getElementById('quizMount');
-let order=[],qPos=0,score=0,locked=false;
+const TEST_NAMES=Object.keys(TESTS);
+let activeTest=TEST_NAMES[0];
+let activeQuestions=[];
+let order=[],qPos=0,score=0,locked=false,shuffledOpts=null;
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function buildSelector(){
+  const bar=document.createElement('div');
+  bar.className='test-switch';
+  bar.innerHTML='<span class="ts-label">Choose a test:</span>';
+  const seg=document.createElement('div');seg.className='ts-seg';
+  TEST_NAMES.forEach(name=>{
+    const b=document.createElement('button');
+    b.textContent=name;b.className=name===activeTest?'on':'';
+    b.onclick=()=>{activeTest=name;[...seg.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');startQuiz();window.scrollTo({top:document.getElementById('quiz').offsetTop-60,behavior:'smooth'});};
+    seg.appendChild(b);
+  });
+  bar.appendChild(seg);
+  return bar;
+}
+
 function startQuiz(){
-  order=shuffle([...Array(QUESTIONS.length).keys()]);
+  activeQuestions=TESTS[activeTest];
+  order=shuffle([...Array(activeQuestions.length).keys()]);
   qPos=0;score=0;locked=false;renderQ();
 }
+
+// Shuffle the four options for the current question and track where the correct one lands.
+function makeShuffledOptions(item){
+  const idx=shuffle([0,1,2,3]);            // new display order of original option indices
+  const opts=idx.map(i=>item.o[i]);        // reordered option texts
+  const correctPos=idx.indexOf(item.a);    // where the correct answer now sits
+  return {opts,correctPos};
+}
+
 function renderQ(){
   locked=false;
-  const item=QUESTIONS[order[qPos]];
-  const pct=Math.round(qPos/QUESTIONS.length*100);
+  const item=activeQuestions[order[qPos]];
+  shuffledOpts=makeShuffledOptions(item);
+  const pct=Math.round(qPos/activeQuestions.length*100);
   const letters=['A','B','C','D'];
-  mount.innerHTML=
+  mount.innerHTML='';
+  mount.appendChild(buildSelector());
+  const card=document.createElement('div');
+  card.innerHTML=
     '<div class="quiz-card">'+
-      '<div class="quiz-top"><span class="qmeta">Question '+(qPos+1)+' of '+QUESTIONS.length+'</span><span class="qtag">'+item.t+'</span></div>'+
+      '<div class="quiz-top"><span class="qmeta">'+activeTest+' · Question '+(qPos+1)+' of '+activeQuestions.length+'</span><span class="qtag">'+item.t+'</span></div>'+
       '<div class="quiz-prog"><i style="width:'+pct+'%"></i></div>'+
       '<div class="quiz-q"><span class="n">Q'+(qPos+1)+'.</span>'+item.q+'</div>'+
       '<div class="opts" id="opts"></div>'+
       '<div class="quiz-fb" id="fb"></div>'+
-      '<div class="quiz-actions"><span class="qmeta">Score: '+score+'</span><button class="btn primary" id="nextBtn" disabled>'+(qPos===QUESTIONS.length-1?'See results':'Next question')+'</button></div>'+
+      '<div class="quiz-actions"><span class="qmeta">Score: '+score+'</span><button class="btn primary" id="nextBtn" disabled>'+(qPos===activeQuestions.length-1?'See results':'Next question')+'</button></div>'+
     '</div>';
+  mount.appendChild(card);
   const opts=document.getElementById('opts');
-  item.o.forEach((txt,j)=>{
+  shuffledOpts.opts.forEach((txt,j)=>{
     const b=document.createElement('button');b.className='opt';
     b.innerHTML='<span class="key">'+letters[j]+'</span><span>'+txt+'</span>';
-    b.onclick=()=>choose(j,item,opts);
+    b.onclick=()=>choose(j,opts);
     opts.appendChild(b);
   });
   document.getElementById('nextBtn').onclick=()=>{
-    if(qPos===QUESTIONS.length-1){showResults();}
+    if(qPos===activeQuestions.length-1){showResults();}
     else{qPos++;renderQ();window.scrollTo({top:document.getElementById('quiz').offsetTop-60,behavior:'smooth'});}
   };
 }
-function choose(j,item,opts){
+
+function choose(j,opts){
   if(locked)return;locked=true;
+  const item=activeQuestions[order[qPos]];
+  const correctPos=shuffledOpts.correctPos;
   const btns=[...opts.children];
   btns.forEach((b,k)=>{
     b.disabled=true;
-    if(k===item.a)b.classList.add('correct');
+    if(k===correctPos)b.classList.add('correct');
     else if(k===j)b.classList.add('wrong');
     else b.classList.add('dim');
   });
   const fb=document.getElementById('fb');
-  if(j===item.a){score++;fb.className='quiz-fb ok show';fb.innerHTML='<b>Correct.</b> '+item.e;}
+  if(j===correctPos){score++;fb.className='quiz-fb ok show';fb.innerHTML='<b>Correct.</b> '+item.e;}
   else{fb.className='quiz-fb no show';fb.innerHTML='<b>Not quite.</b> '+item.e;}
   document.querySelector('.quiz-actions .qmeta').textContent='Score: '+score;
   document.getElementById('nextBtn').disabled=false;
 }
+
 function showResults(){
-  const pct=Math.round(score/QUESTIONS.length*100);
+  const total=activeQuestions.length;
+  const pct=Math.round(score/total*100);
   const R=80,C=2*Math.PI*R,off=C*(1-pct/100);
   let title,msg;
   if(pct>=90){title='Outstanding';msg='You know this material cold. A final skim of any missed questions and you are fully exam-ready.';}
   else if(pct>=75){title='Strong work';msg='A solid grasp. Review the few you missed and you will be in great shape.';}
   else if(pct>=60){title='Good base';msg='You have the foundations. Revisit the topics where you slipped and run the quiz again.';}
   else{title='Keep going';msg='Re-read the topic summaries and full-detail panels, then try the quiz again — repetition is how it sticks.';}
-  mount.innerHTML=
+  mount.innerHTML='';
+  mount.appendChild(buildSelector());
+  const wrap=document.createElement('div');
+  wrap.innerHTML=
     '<div class="results show">'+
       '<div class="ring-wrap"><svg width="180" height="180" viewBox="0 0 180 180">'+
         '<circle cx="90" cy="90" r="80" fill="none" stroke="var(--surface-3)" stroke-width="12"/>'+
         '<circle cx="90" cy="90" r="80" fill="none" stroke="url(#rg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" id="ring"/>'+
         '<defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--a-tint)"/><stop offset="1" stop-color="var(--b-tint)"/></linearGradient></defs>'+
-      '</svg><div class="pct"><span class="big">'+pct+'%</span><span class="sub">'+score+' / '+QUESTIONS.length+'</span></div></div>'+
-      '<h3>'+title+'</h3><p class="msg">'+msg+'</p>'+
-      '<div class="quiz-actions" style="justify-content:center"><button class="btn primary" id="againBtn">Restart &amp; shuffle</button></div>'+
+      '</svg><div class="pct"><span class="big">'+pct+'%</span><span class="sub">'+score+' / '+total+'</span></div></div>'+
+      '<h3>'+title+' · '+activeTest+'</h3><p class="msg">'+msg+'</p>'+
+      '<div class="quiz-actions" style="justify-content:center;gap:10px"><button class="btn primary" id="againBtn">Restart &amp; shuffle</button></div>'+
     '</div>';
-  requestAnimationFrame(()=>{setTimeout(()=>{document.getElementById('ring').style.transition='stroke-dashoffset 1s var(--ease)';document.getElementById('ring').style.strokeDashoffset=off;},60);});
+  mount.appendChild(wrap);
+  requestAnimationFrame(()=>{setTimeout(()=>{const r=document.getElementById('ring');r.style.transition='stroke-dashoffset 1s var(--ease)';r.style.strokeDashoffset=off;},60);});
   document.getElementById('againBtn').onclick=()=>{startQuiz();window.scrollTo({top:document.getElementById('quiz').offsetTop-60,behavior:'smooth'});};
 }
 startQuiz();
